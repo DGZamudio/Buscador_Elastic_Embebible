@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --font-work-sans: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html {
+    --container-lg: 32rem;
+    --container-3xl: 48rem;
+    --container-5xl: 64rem;
+    --container-7xl: 80rem;
+
+    --letra-xs: 0.75rem;
+    --letra-sm: 0.875rem;
+    --letra-lg: 1.125rem;
+    --letra-2xl: 1.5rem;
+    --letra-3xl: 1.875rem;
+    --letra-5xl: 3rem;
+
+    --reestablecerLetra: 1;
+    --letra8: calc(8px * var(--reestablecerLetra));
+    --letra9: calc(9px * var(--reestablecerLetra));
+    --letra10: calc(10px * var(--reestablecerLetra));
+    --letra11: calc(11px * var(--reestablecerLetra));
+    --letra12: calc(12px * var(--reestablecerLetra));
+    --letra13: calc(13px * var(--reestablecerLetra));
+    --letra14: calc(14px * var(--reestablecerLetra));
+    --letra15: calc(15px * var(--reestablecerLetra));
+    --letra16: calc(16px * var(--reestablecerLetra));
+    --letra17: calc(17px * var(--reestablecerLetra));
+    --letra18: calc(18px * var(--reestablecerLetra));
+    --letra20: calc(20px * var(--reestablecerLetra));
+    --letra21: calc(21px * var(--reestablecerLetra));
+    --letra22: calc(22px * var(--reestablecerLetra));
+    --letra23: calc(23px * var(--reestablecerLetra));
+    --letra24: calc(24px * var(--reestablecerLetra));
+    --letra25: calc(25px * var(--reestablecerLetra));
+    --letra26: calc(26px * var(--reestablecerLetra));
+    --letra27: calc(27px * var(--reestablecerLetra));
+    --letra28: calc(28px * var(--reestablecerLetra));
+    --letra30: calc(30px * var(--reestablecerLetra));
+    --letra32: calc(32px * var(--reestablecerLetra));
+    --letra33: calc(33px * var(--reestablecerLetra));
+    --letra35: calc(35px * var(--reestablecerLetra));
+    --letra38: calc(38px * var(--reestablecerLetra));
+    --letra36: calc(36px * var(--reestablecerLetra));
+    --letra40: calc(40px * var(--reestablecerLetra));
+    --letra50: calc(50px * var(--reestablecerLetra));
+    --letra58: calc(58px * var(--reestablecerLetra));
+    --letra68: calc(68px * var(--reestablecerLetra));
+    --letra88: calc(88px * var(--reestablecerLetra));
+    --letra142: calc(142px * var(--reestablecerLetra));
+
+    font-style: normal;
+}
+
+body {
+    font-family: var(--font-work-sans), system-ui, sans-serif;
+}
+
+
+/* DEFINICIÓN DE COLORES */
+
+html {
+  --colorAzul: #00aeef;
+  --colorAzul-claro: #2cb4e6;
+  --colorAzul-oscuro: #0081b1;
+  --colorVino: #7a1f1f;
+  --colorVino-escala: #8c2a2a;
+  --colorBlanco: #FFF;
+  --colorBlanco-escala-2: #f1f1f1;
+  --colorBlanco-escala-3: #d6dadb;
+  --colorBlanco-escala-4: #f5f5f4;
+  --colorGris: #b9bdc2;
+  --colorGris-escala-2: #292524;
+  --colorGris-escala-3: #46423d;
+  --colorGris-escala-4: #9ca3af;
+  --colorNegro: #000;
+  --colorNegro-escala-2: #0f0f0f;
+
+  /* VARIABLES ESTATICAS */
+  /* -> VARIABLES ESTATICAS */
+}
+
+:root {
+  /* GENERAL PARA TODAS LAS PAGS */
+  
+  --colorBackgroundGeneral: var(--colorBlanco-escala-2);
+  --colorForegroundGeneral: var(--colorNegro-escala-2);
+
+  /* -> GENERAL PARA TODAS LAS PAGS */
+
+  /* BUSCADOR */
+
+  --colorTituloBuscador: var(--colorAzul);
+  --colorAvisoInformativo: var(--colorGris-escala-3);
+  --colorFuncionesBarraBusqueda: var(--colorAzul);
+  --colorBackgroundBarraBusqueda: color-mix(in srgb, var(--colorBlanco-escala-2) 40%, transparent);
+  --colorBordesBarraBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
+  --colorBordesBarraBusquedaActiva: var(--colorAzul);
+  --colorBackgroundBotonBusquedaActivo: var(--colorAzul-claro);
+  --colorSimbolosActivosBarraBusqueda: var(--colorBlanco-escala-2);
+  --colorBackgroundResultados: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
+  --colorBordesResultados: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
+  --colorResultadoHover: color-mix(in srgb, var(--colorGris) 20%, transparent);
+  --colorTituloResultado: var(--colorAzul-oscuro);
+  --colorCaracteristicasResultado: var(--colorNegro);
+  --colorContenidoResultado: var(--colorGris-escala-3);
+  --colorBackgroundSugerenciasBusqueda: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
+  --colorBordeSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
+  --colorHoverSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
+  /* -> BUSCADOR */
+
+  /* FILTROS */
+
+  --colorBordeFiltro: var(--colorNegro-escala-2);
+  --colorBordeFiltroActivo: var(--colorAzul);
+
+  /* -> FILTROS */
+
+  /* MODALES */
+
+  --colorBackgroundModales: var(--colorBlanco-escala-2);
+  --colorBordesModales: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
+  --colorBotonModales: var(--colorAzul);
+  --colorBotonActivoModales: var(--colorAzul-claro);
+  --colorBotonSecundarioModales: var(--colorGris-escala-4);
+  --colorBotonSecundarioActivoModales: var(--colorNegro-escala-2);
+  --colorBotonPaginacion: var(--colorBlanco-escala-3);
+  --colorBotonHoverPaginacion: var(--colorGris);
+
+  /* -> MODALES */
+
+  /* FACETA */
+
+  --colorBackgroundFaceta: var(--colorBlanco-escala-2);
+  --colorBordesFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
+  --colorBordesFacetaInterno: color-mix(in srgb, var(--colorNegro-escala-2) 40%, transparent);
+  --colorContadorFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 70%, transparent);
+
+  /* -> FACETA */
+}
+
+/* -> DEFINICIÓN DE COLORES */
+
+body {
+  background: var(--colorBackgroundGeneral);
+  color: var(--colorForegroundGeneral);
+}

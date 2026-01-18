@@ -1,0 +1,90 @@
+.filtros-facetados {
+    margin-top: 0.75rem;
+    border-radius: 1rem;
+    background-color: var(--colorBackgroundFaceta);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--colorBordesFaceta);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.filtros-facetados-tipo {
+    border-bottom: 1px solid var(--colorBordesFacetaInterno);
+    padding: 0.75rem 1rem;
+}
+
+.filtros-facetados-tipo-boton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.filtros-facetados-tipo-boton:hover {
+    color: var(--colorNegro-escala-2);
+}
+
+.filtros-facetados-tipo-nombre {
+    font-weight: 600;
+}
+
+.filtros-facetados-contador {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--colorContadorFaceta);
+}
+
+.filtros-facetados-contador-secundario {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--colorContadorFaceta);
+}
+
+.filtros-facetados-entidades {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filtros-facetados-entidad-boton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    font-size: var(--letra-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.2s ease;
+}
+
+.filtros-facetados-entidad-boton:hover {
+    color: var(--colorGris-escala-3);
+}
+
+.filtros-facetados-anios {
+    margin-top: 0.25rem;
+    margin-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.filtros-facetados-anio {
+    background: none;
+    border: none;
+    font-size: var(--letra-xs);
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.filtros-facetados-anio:hover {
+    color: var(--colorGris-escala-3);
+}

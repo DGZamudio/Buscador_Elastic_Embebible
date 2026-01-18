@@ -1,0 +1,117 @@
+.grupo-campo-filtro {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.etiqueta-campo-filtro {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.contenedor-input-casilla-numero-filtro {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    border: 1px solid color-mix(in srgb, var(--colorBordeFiltro) 10%, transparent);
+    border-radius: 4px;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contenedor-input-casilla-numero-filtro:focus-within {
+    border-color: var(--colorBordeFiltroActivo);
+    box-shadow: 0 0 0 1px var(--colorBordeFiltroActivo);
+}
+
+.input-casilla-numero-filtro {
+    width: 87.5%;
+    padding: 8px;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-size: 14px;
+}
+
+.campo-input-filtro {
+    width: 70%;
+}
+
+.campo-select-filtro {
+    width: 25%;
+    cursor: pointer;
+}
+
+
+.campo-input-filtro,
+.campo-select-filtro {
+    padding: 8px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.875rem;
+}
+
+
+.input-casilla-numero-filtro::-webkit-outer-spin-button,
+.input-casilla-numero-filtro::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-casilla-numero-filtro[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.boton-limpiar-filtro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    padding: 4px;
+    color: var(--color-foreground);
+}
+
+.boton-limpiar-filtro:hover {
+    opacity: 0.7;
+}
+
+.rango-anios-filtro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.separador-rango-anios {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.campo-input-rango {
+    width: 33%;
+    display: flex;
+    justify-content: space-evenly;
+
+    border: 1px solid color-mix(in srgb, var(--colorBordeFiltro) 10%, transparent);
+    border-radius: 4px;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo-input-rango:focus {
+    border-color: var(--colorBordeFiltroActivo);
+    box-shadow: 0 0 0 1px var(--colorBordeFiltroActivo);
+}

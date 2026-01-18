@@ -1,0 +1,314 @@
+.contenedor-body {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.contenedor-main {
+    display: flex;
+    flex-direction: column;
+    gap: 8;
+    align-items: center;
+    width: 100%;
+}
+
+.contenedor-texto-buscador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--letra-5xl);
+}
+
+.titulo-buscador {
+  color: var(--colorTituloBuscador);
+  font-size: var(--letra-3xl);
+  margin-bottom: 12px;
+}
+
+.descripcion-buscador {
+  font-size: var(--letra-sm);
+  max-width: var(--container-lg);
+  text-align: center;
+}
+
+.contenedor-buscador {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.panel-resultados-flotante {
+  position: absolute;
+  top: 100%;
+  margin-top: 40px;
+  width: 100%;
+  max-width: var(--container-5xl);
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.contenedor-resultados-modal {
+  width: 100%;
+}
+
+.layout-resultados {
+  display: flex;
+  gap: 24px;
+}
+
+.panel-filtros-lateral {
+  width: 30%;
+  position: sticky;
+  top: 0;
+}
+
+.contenido-resultados {
+  width: 70%;
+}
+
+.contenedor-loader {
+  margin: 60px 0;
+  text-align: center;
+}
+
+.fila-filtros {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .layout-resultados {
+    flex-direction: column;
+  }
+
+  .panel-filtros-lateral,
+  .contenido-resultados {
+    width: 100%;
+  }
+}
+
+/* Barra de busqueda */
+.buscador-formulario {
+    position: relative;
+    width: 100%;
+    max-width: var(--container-5xl);
+}
+
+.buscador-contenedor {
+    display: flex;
+    align-items: stretch;
+    border-radius: 1rem;
+    border: 1px solid var(--colorBordesBarraBusqueda);
+    background-color: var(--colorBackgroundBarraBusqueda);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buscador-contenedor:focus-within {
+    border-color: var(--colorBordesBarraBusquedaActiva);
+    box-shadow: 0 0 0 1px var(--colorBordesBarraBusquedaActiva);
+}
+
+.buscador-input {
+    flex: 1;
+    background: transparent;
+    padding: 1rem 1.25rem;
+    border: none;
+    outline: none;
+    font-size: var(--letra-lg);
+    color: var(--colorNegro-escala-2);
+}
+
+.buscador-boton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    background: none;
+    border: none;
+    border-left: 1px solid var(--colorBordesBarraBusqueda);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.buscador-boton-limpiar {
+    color: var(--colorFuncionesBarraBusqueda);
+}
+
+.buscador-boton-limpiar:hover {
+    background-color: var(--colorFuncionesBarraBusqueda);
+    color: var(--colorSimbolosActivosBarraBusqueda);
+}
+
+.buscador-boton-filtros {
+    color: var(--colorNegro-escala-2);
+}
+
+.buscador-boton-filtros:hover {
+    background-color: var(--colorFuncionesBarraBusqueda);
+    color: var(--colorSimbolosActivosBarraBusqueda);
+}
+
+.buscador-boton-activo {
+    color: var(--colorFuncionesBarraBusqueda);
+}
+
+.buscador-boton-buscar {
+    background-color: var(--colorFuncionesBarraBusqueda);
+}
+
+.buscador-boton-buscar:hover {
+    background-color: var(--colorBackgroundBotonBusquedaActivo);
+}
+
+.buscador-icono-buscar {
+    color: var(--colorSimbolosActivosBarraBusqueda);
+    transition: transform 0.2s ease;
+}
+
+.buscador-boton-buscar:hover .buscador-icono-buscar {
+    transform: scale(1.25) rotate(8deg);
+}
+
+
+/* Resultados */
+.panel-resultados {
+    margin-top: 0.75rem;
+    width: 100%;
+    background-color: var(--colorBackgroundResultados);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--colorBordesResultados);
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 40px var(--colorBackgroundResultados);
+    overflow: hidden;
+
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.panel-resultados-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.panel-resultados-oculto {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    pointer-events: none;
+}
+
+.panel-resultados-lista {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-resultados-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+}
+
+.panel-resultados-item:not(:last-child) {
+    border-bottom: 1px solid var(--colorBordesResultados);
+}
+
+.panel-resultados-item:hover {
+    background-color: var(--colorResultadoHover);
+}
+
+.panel-resultados-titulo {
+    font-weight: bold;
+    color: var(--colorTituloResultado);
+}
+
+.panel-resultados-epigrafe {
+    color: var(--colorContenidoResultado);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.panel-resultados-meta {
+    font-size: var(--letra-sm);
+    color: var(--colorCaracteristicasResultado);
+    font-weight: bold;
+}
+
+/* PANEL RESULTADOS */
+.panel-sugerencias-busqueda {
+    margin-top: 0.75rem;
+    width: 100%;
+
+    background-color: var(--colorBackgroundSugerenciasBusqueda);
+    backdrop-filter: blur(16px);
+
+    border: 1px solid var(--colorBordeSugerenciasBusqueda);
+    border-radius: 0.75rem;
+
+    box-shadow:
+        0 20px 30px var(--colorBackgroundSugerenciasBusqueda);
+
+    overflow: hidden;
+
+    transition:
+        opacity 0.2s ease-out,
+        transform 0.2s ease-out;
+}
+
+.panel-sugerencias-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.panel-sugerencias-oculto {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    pointer-events: none;
+}
+
+.panel-sugerencias-item {
+    display: block;
+    padding: 0.75rem 1rem;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+}
+
+.panel-sugerencias-item:hover {
+    background-color: var(--colorHoverSugerenciasBusqueda);
+}
+
+.panel-sugerencias-titulo {
+    color: var(--colorTituloResultado);
+    font-weight: 500;
+}
+
+.panel-sugerencias-resumen-contenedor {
+    max-width: 90%;
+}
+
+.panel-sugerencias-resumen {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--colorContenidoResultado);
+    font-size: var(--letra-sm);
+}
+
+.panel-sugerencias-meta {
+    margin: 0;
+    color: var(--colorCaracteristicasResultado);
+}

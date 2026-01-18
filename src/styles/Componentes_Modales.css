@@ -1,0 +1,229 @@
+/* Overlay completo del modal de filtros */
+.filtros-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+}
+
+.filtros-modal-fondo {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+}
+
+.filtros-modal-contenedor {
+    position: relative;
+    margin: 8rem auto 0 auto;
+    width: 100%;
+    max-width: var(--container-3xl);
+}
+
+.filtros-modal-caja {
+    background-color: var(--colorBackgroundModales);
+    border: 1px solid var(--colorBordesModales);
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.filtros-modal-encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--colorBordesModales);
+}
+
+.filtros-modal-titulo {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.filtros-modal-boton-cerrar {
+    background: none;
+    border: none;
+    color: var(--colorBotonSecundarioModales);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.filtros-modal-boton-cerrar:hover {
+    color: var(--colorBotonSecundarioActivoModales);
+}
+
+.filtros-modal-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+}
+
+.filtros-modal-pie {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--colorBordesModales);
+}
+
+.filtros-modal-boton-cancelar {
+    background: none;
+    border: none;
+    font-size: 0.875rem;
+    color: var(--colorBotonSecundarioModales);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.filtros-modal-boton-cancelar:hover {
+    color: var(--colorBotonSecundarioActivoModales);
+}
+
+.filtros-modal-boton-aplicar {
+    background-color: var(--colorBotonModales);
+    color: var(--colorBlanco);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filtros-modal-boton-aplicar:hover {
+    background-color: var(--colorBotonActivoModales);
+    color: var(--colorNegro-escala-2);
+}
+
+
+/* Overlay del modal de resultados */
+.modal-resultados-contenedor {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-resultados-overlay {
+    position: absolute;
+    inset: 0;
+
+    background-color: var(--colorBackgroundModales);
+    backdrop-filter: blur(4px);
+}
+
+.modal-resultados-panel {
+    position: relative;
+
+    width: 100%;
+    max-width: var(--container-7xl);
+    margin: 0 1rem;
+
+    background-color: var(--colorBackgroundModales);
+    border: 1px solid var(--colorBordesModales);
+    border-radius: 1rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+}
+
+.modal-resultados-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--colorBordesModales);
+}
+
+.modal-resultados-titulo {
+    font-size: var(--letra-2xl);
+    font-weight: 600;
+}
+
+@media (min-width: 640px) {
+    .modal-resultados-titulo {
+        font-size: var(--letra-3xl);
+    }
+}
+
+.modal-resultados-subtitulo {
+    font-size: var(--letra-sm);
+    color: color-mix(in srgb, var(--colorNegro-escala-2) 50%, transparent);
+}
+
+@media (min-width: 640px) {
+    .modal-resultados-subtitulo {
+        font-size: 1rem;
+    }
+}
+
+.modal-resultados-boton-cerrar {
+    color: var(--colorGris);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.modal-resultados-boton-cerrar:hover {
+    color: var(--colorNegro-escala-2);
+}
+
+.modal-resultados-contenido {
+    padding: 1rem 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modal-resultados-footer {
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--colorBordesModales);
+    border-radius: 0px 0px 1rem 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--colorBackgroundModales);
+}
+
+.modal-resultados-boton-paginacion {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+
+    background-color: var(--colorBotonPaginacion);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    outline: none;
+    border:none;
+}
+
+.modal-resultados-boton-paginacion:hover:not(:disabled) {
+    background-color: var(--colorBotonHoverPaginacion);
+}
+
+.modal-resultados-boton-paginacion:disabled {
+    cursor: default;
+    opacity: 0;
+}
+
+.modal-resultados-indicador-pagina {
+    font-size: var(--letra-sm);
+}
