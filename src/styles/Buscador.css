@@ -63,7 +63,7 @@
 
 .panel-filtros-lateral {
   width: 30%;
-  position: sticky;
+  position: relative;
   top: 0;
 }
 

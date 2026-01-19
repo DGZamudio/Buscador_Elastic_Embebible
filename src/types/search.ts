@@ -157,6 +157,7 @@ export interface ResultsModalProps {
 export interface LoaderProps {
     visible : boolean;
     bottom? : boolean;
+    variant?: "search" | "filters";
 }
 
 export type initialFilters = {

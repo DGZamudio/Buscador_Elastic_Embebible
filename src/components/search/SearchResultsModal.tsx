@@ -1,7 +1,7 @@
 "use client"
 import "../../styles/Componentes_Modales.css"
 import { useEffect } from "react"
-import { StepBack, StepForward, X } from "lucide-react"
+import { StepBack, StepForward } from "lucide-react"
 import type { ResultsModalProps } from "../../types/search"
 
 export default function ResultsModal({
@@ -33,13 +33,7 @@ export default function ResultsModal({
 
     return (
         <div className="modal-resultados-contenedor">
-            <div
-                className="modal-resultados-overlay"
-                onClick={onClose}
-            />
-
             <div className="modal-resultados-panel">
-                
                 <div className="modal-resultados-header">
                     <div>
                         <h2 className="modal-resultados-titulo">Esto encontramos:</h2>
@@ -47,12 +41,12 @@ export default function ResultsModal({
                             Resultados mejorados usando búsqueda semántica
                         </p>
                     </div>
-                    <button
+                    {/* <button
                         onClick={onClose}
                         className="modal-resultados-boton-cerrar"
                     >
                         <X size="1.2em" />
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="modal-resultados-contenido">

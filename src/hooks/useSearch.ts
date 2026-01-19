@@ -59,6 +59,7 @@ export function useSearch() {
         .then((data) => setFragmentedFilters(data))
         .catch(console.error)
         .finally(() => setLoadingFragments(false))
+
     }, [query, normalizedFilters, hasActiveFilters])
 
     useEffect(() => {
@@ -114,7 +115,9 @@ export function useSearch() {
         if (searchType !== "semantic") return
 
         setLoading(true)
-        memoizedUseGetFragmentedFilters()
+        if (page === 0) {
+            memoizedUseGetFragmentedFilters()
+        }
         semanticSearch(query, normalizedFilters, hasActiveFilters, page)
         .then((data) => {
             setResults(data?.hits ?? [])

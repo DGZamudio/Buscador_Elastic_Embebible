@@ -30,7 +30,7 @@ export default function FragmentedFilters({
   return (
     <div className="filtros-facetados">
         {loading ? (
-            <Loader visible/>
+            <Loader variant="filters" visible/>
         ) : (
             <>
                 {fragments?.tipo.buckets.map((tipo, index) => {

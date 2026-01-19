@@ -59,7 +59,7 @@ export default function Buscador() {
                     filterActive={hasActiveFilters}
                 />
 
-                <Typing visible={isTyping && !loading} />
+                <Typing visible={isTyping && !loading && !results && !resultsOpen} />
 
                 <Loader visible={!isTyping && loading}/>
 
