@@ -17,6 +17,7 @@ export default function SearchResultsPanel({
                 key={index}
                 className="panel-sugerencias-item"
                 href={`https://www.medellin.gov.co/normograma/docs/astrea/docs/${hit._source.Numero}.htm`}
+                target="_blank"
             >
                 <p className="panel-sugerencias-titulo">
                     {hit._source.title}

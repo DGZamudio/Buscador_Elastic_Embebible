@@ -157,14 +157,36 @@ export interface ResultsModalProps {
 export interface LoaderProps {
     visible : boolean;
     bottom? : boolean;
-    variant?: "search" | "filters";
+    variant?: "search" | "filters" | "sugerencia";
 }
 
 export type initialFilters = {
     entidades: {
-        buckets: AggBucket[]
+        buckets: AggBucket[];
     },
     tipos: {
-        buckets: AggBucket[]
+        buckets: AggBucket[];
     }
+}
+
+export type citationType = {
+    chunk_id       : string;
+    content        : string;
+    filepath?      : string;
+    id?            : string;
+    image_mapping? : string;
+    metadata?      : string;
+    title          : string;
+    url?           : string;
+}
+
+export type aiResponseType = {
+    message   : string;
+    citations : citationType[];
+}
+
+export interface AiMessageCardProps {
+    message?   : string;
+    citations? : citationType[];
+    loading    : boolean;
 }

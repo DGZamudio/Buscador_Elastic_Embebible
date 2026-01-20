@@ -22,6 +22,7 @@ export default function SearchResultsContent({
                                 key={index}
                                 className="panel-resultados-item"
                                 href={`https://www.medellin.gov.co/normograma/docs/astrea/docs/${hit._source.Numero}.htm`}
+                                target="_blank"
                             >
                                 <p className="panel-resultados-titulo">
                                     {hit._source.title}

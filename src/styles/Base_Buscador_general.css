@@ -70,7 +70,7 @@ html {
   --colorBlanco: #FFF;
   --colorBlanco-escala-2: #f1f1f1;
   --colorBlanco-escala-3: #d6dadb;
-  --colorBlanco-escala-4: #f5f5f4;
+  --colorBlanco-escala-4: #e2e0e056;
   --colorGris: #b9bdc2;
   --colorGris-escala-2: #292524;
   --colorGris-escala-3: #46423d;
@@ -139,6 +139,14 @@ html {
   --colorContadorFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 70%, transparent);
 
   /* -> FACETA */
+
+  /* TARJETA IA */
+
+  --colorBackgroundTarjetaIa: var(--colorBlanco-escala-4);
+  --colorTextoDisclaimerIa: var(--colorAzul-oscuro);
+  --colorReferenciasIa: var(--colorAzul-oscuro);
+
+  /* -> TARJETA IA */
 }
 
 /* -> DEFINICIÓN DE COLORES */

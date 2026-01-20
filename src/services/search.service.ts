@@ -102,3 +102,33 @@ export async function fragmentFilters(
 
   return data?.filters ?? null;
 }
+
+export async function getAiMessage(
+    query:string,
+    role:string = "user"
+) {
+    const id = crypto.randomUUID();
+    const date = new Date().toISOString()
+
+    const response = await fetch(
+        'https://gacetas-constitucion.normograma.com/creg4/conversation',
+        {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "messages":[
+                    {
+                        "id":id,
+                        "role":role,
+                        "content":query,
+                        "date":date
+                    }
+                ]
+            })
+        }
+    )
+
+    return response
+}

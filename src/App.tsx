@@ -14,6 +14,7 @@ import Typing from "./components/ui/isTyping"
 import NoResults from "./components/ui/NoResults";
 import FilterNumber from "./components/search/FilterNumber";
 import FragmentedFilters from "./components/search/FragmentedFiltersPanel";
+import AiMessageCard from "./components/ui/AiMessageCard";
 
 export default function Buscador() {
   const {
@@ -31,7 +32,9 @@ export default function Buscador() {
     setPage,
     setSearchType,
     setSelectedFacetaFilters,
-    isTyping
+    isTyping,
+    aiResponse,
+    loadingAiResponse
   } = useSearch();
 
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
@@ -52,10 +55,18 @@ export default function Buscador() {
             <div className="contenedor-buscador">
                 <SearchBar
                     value={query}
-                    onChange={setQuery}
+                    onChange={(value) => {
+                        setQuery(value)
+                        setResultsOpen(false)
+                        setSearchType("title")
+                        setSelectedFacetaFilters({})
+                    }}
                     onOpenFilters={() => setFiltersOpen(true)}
                     onSubmit={() => setResultsOpen(true)}
-                    onCleanFilters={() => setFilters({})}
+                    onCleanFilters={() => {
+                        setFilters({})
+                        setSelectedFacetaFilters({})
+                    }}
                     filterActive={hasActiveFilters}
                 />
 
@@ -63,7 +74,7 @@ export default function Buscador() {
 
                 <Loader visible={!isTyping && loading}/>
 
-                <NoResults visible={!isTyping && !loading && query.length > 0 && results.length == 0} />
+                <NoResults variant="sugerencia" visible={!isTyping && !loading && query.length > 0 && results.length == 0} />
 
                 <div className="panel-resultados-flotante">
                     <SearchResultsPanel 
@@ -108,6 +119,13 @@ export default function Buscador() {
                             </aside>
                             
                             <section className="contenido-resultados">
+                                {(aiResponse || loadingAiResponse) && (
+                                    <AiMessageCard
+                                        message={aiResponse?.message}
+                                        citations={aiResponse?.citations}
+                                        loading={loadingAiResponse}
+                                    />
+                                )}
                                 <SearchResultsContent 
                                     results={results}
                                     visible
