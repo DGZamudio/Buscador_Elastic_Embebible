@@ -12,19 +12,23 @@ export interface SearchHit {
         Nombre          : string;
         NombreEpigrafe  : string;
     };
-
+    highlight? : {
+        Epigrafe? : string[];
+        body?  : string[];
+    };
 }
 
 export type searchType = "title" | "semantic" | "regular";
 
 export interface SearchBarProps {
-    value          : string;
-    onChange       : (value: string) => void;
-    onSubmit?      : () => void;
-    onOpenFilters  : () => void;
-    onCleanFilters : () => void;
-    placeholder?   : string;
-    filterActive?  : boolean;
+    value               : string;
+    onChange            : (value: string) => void;
+    onSubmit?           : () => void;
+    onOpenFilters       : () => void;
+    onCleanFilters      : () => void;
+    placeholder?        : string;
+    filterActive?       : boolean;
+    visibleJurIaButton? : boolean;
 }
 
 export interface SearchResultsProps {
@@ -178,6 +182,7 @@ export type citationType = {
     metadata?      : string;
     title          : string;
     url?           : string;
+    number?        : number;
 }
 
 export type aiResponseType = {

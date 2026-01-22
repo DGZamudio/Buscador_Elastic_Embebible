@@ -109,6 +109,10 @@ html {
   --colorBackgroundSugerenciasBusqueda: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
   --colorBordeSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
   --colorHoverSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
+  --colorBotonModoIa: var(--colorAzul);
+  --colorBackgroundBotonModoIaHover: var(--colorAzul);
+  --colorBotonModoIaHover: var(--colorBlanco);
+  --colorBotonActivoModoIa: var(--colorAzul-claro);
   /* -> BUSCADOR */
 
   /* FILTROS */

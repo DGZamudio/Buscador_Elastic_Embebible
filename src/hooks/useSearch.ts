@@ -161,70 +161,82 @@ export function useSearch() {
 }
 
 // Funciones utiles - Utils
-async function formatAiResponse(response:Response) {
-    const docRegex = /\[doc(\d*)\]/g
-
+async function formatAiResponse(response: Response) {
     if (!response.body) return
 
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder('utf-8');
-    let resultText = '';
+    const reader = response.body.getReader()
+    const decoder = new TextDecoder('utf-8')
+    let resultText = ''
 
     while (true) {
-        const { done, value } = await reader.read();
-
+        const { done, value } = await reader.read()
         if (done) break
+        resultText += decoder.decode(value, { stream: true })
+    }
 
-        resultText += decoder.decode(value, { stream: true });
-    } // Lee el stream de mensajes hasta que dejen de llegar
-
-    resultText += decoder.decode();
+    resultText += decoder.decode()
 
     const parts = resultText.split("\n")
     let citacionesRaw: citationType[] = []
     let message = ''
 
-    for (let i=0; i < parts.length; i++) {
+    for (const part of parts) {
         try {
-            if (parts[i] == "") continue
+            if (!part) continue
+            const iteration = JSON.parse(part)
+            const contenido = iteration.choices[0].messages[0].content
 
-            const iteration = JSON.parse(parts[i])
-            let contenido = iteration.choices[0].messages[0].content
+            if (!contenido) continue
 
-            if (contenido !== "") {
-                if (contenido.includes("{")) {
-                    contenido = JSON.parse(contenido)
-
-                    if (contenido.citations) {
-                        citacionesRaw = contenido.citations
-                    }
-                }
-                else {
-                    message += contenido
-                }
+            if (contenido.includes("{")) {
+                const parsed = JSON.parse(contenido)
+                if (parsed.citations) citacionesRaw = parsed.citations
+            } else {
+                message += contenido
             }
+        } catch (err) {
+            console.error("Ocurrió un error:", err)
         }
-        catch (err) {console.error("Ocurrio un error: ",err)}
-    } // Separar y formatear datos, citaciones de mensaje
+    }
 
-    const indicesCitaciones = [...message.matchAll(docRegex)] // Trasformamos los numeros de los documentos a un array
+    const { normalizedText, docMap } = normalizeDocReferences(message)
 
-    const indicesCitacionesDicionario = countRelevanceCitations(indicesCitaciones) // Transformamos los números de los indices en un diccionario con la cantidad de veces que aparece
-    const citacionesFiltradas = citacionesRaw?.filter((citacion, index) => Object.keys(indicesCitacionesDicionario).includes(index.toString()));
-    return {"message":message, "citations":citacionesFiltradas}
+    const citationIndexMap: Record<number, number> = {}
+    Object.entries(docMap).forEach(([docId, newIndex]) => {
+        citationIndexMap[newIndex] = Number(docId.replace("doc", "")) - 1
+    })
+
+    const citacionesFiltradas = Object.keys(citationIndexMap)
+        .sort((a, b) => Number(a) - Number(b))
+        .map(key => {
+            const visibleNumber = Number(key)
+            const originalIndex = citationIndexMap[visibleNumber]
+
+            return {
+                number: visibleNumber,
+                ...citacionesRaw[originalIndex]
+            }
+    })
+
+    return {
+        message: normalizedText,
+        citations: citacionesFiltradas
+    }
 }
 
-function countRelevanceCitations(citationsIterator: RegExpExecArray[]) {
-    const count: Record<string, number> = {}
-    
-    citationsIterator.forEach(match => {
-        const index = (Number(match[1])-1).toString()
-        if (count[index]) {
-            count[index] += 1;
-        } else {
-            count[index] = 1;
-        }
-    });
 
-    return count;
+function normalizeDocReferences(text: string) {
+    const docRegex = /\[(doc\d+)\]/g
+    const docMap: Record<string, number> = {}
+    let counter = 1
+
+    const normalizedText = text.replace(docRegex, (_, docId) => {
+        if (!docMap[docId]) {
+            docMap[docId] = counter
+            counter++
+        }
+        return `[${docMap[docId]}]`
+    })
+
+    return { normalizedText, docMap }
 }

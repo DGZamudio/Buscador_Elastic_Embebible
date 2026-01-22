@@ -1,7 +1,7 @@
 "use client"
 
 import type { SearchBarProps } from "../../types/search";
-import { BrushCleaning, Funnel, FunnelPlus, Search } from "lucide-react";
+import { Brain, BrushCleaning, Funnel, FunnelPlus, Search } from "lucide-react";
 
 function SearchBar({
     value,
@@ -10,7 +10,8 @@ function SearchBar({
     onOpenFilters,
     onCleanFilters,
     filterActive,
-    placeholder = "Buscar en Astrea..."
+    placeholder = "Buscar en Astrea...",
+    visibleJurIaButton 
 }: SearchBarProps) {
     const handleSubmit = () => {
         if (!value || value == "") return
@@ -66,6 +67,12 @@ function SearchBar({
                 />
             </button>
         </div>
+        {visibleJurIaButton && (
+            <a className="boton-modo-jur-ia" href="https://www.juria.co" target="_blank">
+                <Brain />
+                Modo JurIa
+            </a>
+        )}
     </form>
   )
 }

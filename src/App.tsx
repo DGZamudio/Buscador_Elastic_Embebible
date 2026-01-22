@@ -68,9 +68,10 @@ export default function Buscador() {
                         setSelectedFacetaFilters({})
                     }}
                     filterActive={hasActiveFilters}
+                    visibleJurIaButton={!resultsOpen}
                 />
 
-                <Typing visible={isTyping && !loading && !results && !resultsOpen} />
+                <Typing visible={isTyping} />
 
                 <Loader visible={!isTyping && loading}/>
 

@@ -15,33 +15,37 @@ export default function SearchResultsContent({
                         : "panel-resultados-oculto"
                 }`}
             >
-                {results.length > 0 ? (
-                    <div className="panel-resultados-lista">
-                        {results.map((hit, index) => (
-                            <a
-                                key={index}
-                                className="panel-resultados-item"
-                                href={`https://www.medellin.gov.co/normograma/docs/astrea/docs/${hit._source.Numero}.htm`}
-                                target="_blank"
-                            >
-                                <p className="panel-resultados-titulo">
-                                    {hit._source.title}
-                                </p>
-                                <p className="panel-resultados-epigrafe">
-                                    {hit._source.Epigrafe}
-                                </p>
-                                <p className="panel-resultados-meta">
-                                    {hit._source.Entidad} · {hit._source.Year}
-                                </p>
-                            </a>
-                        ))}
-                    </div>
-                ) : (
-                    <>
-                        <NoResults bottom={false} visible/>
-                    </>
-                )}
+                {results.map((hit, index) => {
+                    const epigrafeHtml =
+                        hit.highlight?.Epigrafe?.[0] ??
+                        hit.highlight?.body?.[0] ??
+                        hit._source.Epigrafe;
 
+                    return (
+                        <a
+                            key={index}
+                            className="panel-resultados-item"
+                            href={`https://www.medellin.gov.co/normograma/docs/astrea/docs/${hit._source.Numero}.htm`}
+                            target="_blank"
+                        >
+                            <p className="panel-resultados-titulo">
+                                {hit._source.title}
+                            </p>
+
+                            <p
+                                className="panel-resultados-epigrafe"
+                                dangerouslySetInnerHTML={{
+                                    __html: epigrafeHtml
+                                }}
+                            />
+
+                            <p className="panel-resultados-meta">
+                                {hit._source.Entidad} · {hit._source.Year}
+                            </p>
+                        </a>
+                    );
+                })}
+                {results.length === 0 && <NoResults bottom={false} visible />}
             </div>
         )}
     </>

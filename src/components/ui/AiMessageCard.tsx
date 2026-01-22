@@ -15,10 +15,9 @@ export default function AiMessageCard({
         </p>
 
         {loading ? (
-            <p className="cargando-mensaje-ia">
-                Analizando y generando respuesta...
-                <div className="rayo-luz-cargando-mensaje-ia"></div>
-            </p>
+            <div className="cargando-mensaje-ia">
+                <span>Analizando y generando respuesta...</span>
+            </div>
         ) : (
             <>
             {message && (
@@ -31,11 +30,11 @@ export default function AiMessageCard({
         <div className={`contenedor-enlaces-referencias ${!openTarjeta && "referencias-cerrado"}`}>
             {citations?.map((citacion, index) => (
                 <a className="contenedor-referencia-ia" key={index} href={`https://gestornormativo.creg.gov.co/gestor/entorno/docs/${citacion.title}`} target="_blank">
-                    {citacion.title}
+                    <span className="contenedor-numero-referencia-ia">{citacion.number}</span> {citacion.title}
                 </a>
             ))}
         </div>
-        {!openTarjeta && (
+        {(!openTarjeta && !loading) && (
             <button className="boton-mostrar-mas-mensaje-ia" onClick={() => setOpenTarjeta(!openTarjeta)}>
                 Mostrar mas
                 <MoveDown  size={"1em"}/>
