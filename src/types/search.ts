@@ -129,7 +129,9 @@ export interface FragmentedFilters {
   tipo : {
     doc_count_error_upper_bound : number
     sum_other_doc_count         : number
-    buckets                     : FragmentedTipo[]
+    normativa                   : FragmentedTipo[]
+    jurisprudencia              : FragmentedTipo[]
+    other                       : FragmentedTipo[]
   }
 }
 // -> Filtros fragmentados jerarquicamente 

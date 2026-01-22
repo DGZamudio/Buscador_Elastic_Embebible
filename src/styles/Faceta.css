@@ -108,44 +108,59 @@
 }
 
 .filtros-facetados-body-wrapper {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.25s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
 }
 
 .filtros-facetados-body-wrapper.open {
-  grid-template-rows: 1fr;
+    grid-template-rows: 1fr;
 }
 
 .filtros-facetados-body {
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+    background-color: var(--colorBackgroundFondoFaceta);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .filtros-facetados-body-wrapper.open .filtros-facetados-body {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .filtros-facetados-tipo {
-  opacity: 0;
-  transform: translateY(-4px);
-  animation: fadeInUp 0.25s ease forwards;
+    opacity: 0;
+    transform: translateY(-4px);
+    animation: fadeInUp 0.25s ease forwards;
 }
 
 .filtros-facetados-body-wrapper.open .filtros-facetados-tipo {
-  animation-delay: calc(var(--i) * 40ms);
+    animation-delay: calc(var(--i) * 40ms);
 }
 
 @keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .titulo-boton-filtros-facetados-toggle {
+    font-weight: bold;
+}
+
+.separador-filtros-facetados {
+    background-color: var(--colorBackgroundFaceta);
+    border: 1px #b5b5b5 solid;
+    border-radius: 1rem;
+    padding: 15px;
+}
+
+.titulo-separador-filtros-facetados {
     font-weight: bold;
 }

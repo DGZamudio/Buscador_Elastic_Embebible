@@ -97,11 +97,18 @@
 /* Barra de busqueda */
 .buscador-formulario {
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
     align-items: center;
     position: relative;
     width: 100%;
     max-width: var(--container-5xl);
+}
+
+@media (min-width: 768px) {
+    .buscador-formulario {
+        flex-direction: row !important;
+    }
 }
 
 .boton-modo-jur-ia {

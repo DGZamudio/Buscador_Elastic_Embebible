@@ -71,7 +71,7 @@ export default function Buscador() {
                     visibleJurIaButton={!resultsOpen}
                 />
 
-                <Typing visible={isTyping} />
+                <Typing visible={isTyping && !resultsOpen} />
 
                 <Loader visible={!isTyping && loading}/>
 
@@ -114,7 +114,12 @@ export default function Buscador() {
                                             ...facetaSelectedFilters
                                         })
                                     }}
-                                    visible={(fragmentedFilters?.tipo?.buckets?.length ?? 0) > 0 && resultsOpen && query.length > 0}
+                                    visible={
+                                        (
+                                            (fragmentedFilters?.tipo?.normativa?.length ?? 0) || 
+                                            (fragmentedFilters?.tipo?.jurisprudencia?.length ?? 0) ||
+                                            (fragmentedFilters?.tipo?.other?.length ?? 0)
+                                        ) > 0 && resultsOpen && query.length > 0}
                                     loading={loadingFragments}
                                 />
                             </aside>

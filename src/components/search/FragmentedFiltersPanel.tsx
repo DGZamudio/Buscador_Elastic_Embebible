@@ -41,7 +41,6 @@ export default function FragmentedFilters({
   }, []);
 
   if (!visible) return null;
-
   return (
     <div className="filtros-facetados">
         {loading ? (
@@ -64,88 +63,279 @@ export default function FragmentedFilters({
                     <div className="filtros-facetados-body">
                         {openFiltrosFacetados && (
                             <div className="filtros-facetados-body">
-                                {fragments?.tipo.buckets.map((tipo, index) => {
-                                    const tipoOpen = openTipos.has(tipo.key);
-
-                                    return (
-                                        <div key={tipo.key} className="filtros-facetados-tipo" style={index == fragments?.tipo.buckets.length -1 ? {border:"none"} : undefined}>
-                                            <button
-                                                onClick={() => {
-                                                    toggle(setOpenTipos, tipo.key)
-                                                    onFilter({
-                                                        document_type: tipo.key
-                                                    })
-                                                }}
-                                                className="filtros-facetados-tipo-boton"
-                                            >
-                                                {tipoOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
-                                                <span className="filtros-facetados-tipo-nombre">
-                                                    {tipo.key}
-                                                </span>
-                                                <span className="filtros-facetados-contador">
-                                                    {tipo.doc_count}
-                                                </span>
-                                            </button>
-
-                                            {tipoOpen && (
-                                                <div className="filtros-facetados-entidades">
-                                                    {tipo.entidad.buckets.map(entidad => {
-                                                        const entidadKey = `${tipo.key}-${entidad.key}`;
-                                                        const entidadOpen = openEntidades.has(entidadKey);
-
-                                                        return (
-                                                            <div key={entidadKey} className="filtros-facetados-entidad">
-                                                                <button
-                                                                    onClick={() => {
-                                                                        toggle(setOpenEntidades, entidadKey)
-                                                                        onFilter({
-                                                                            entity: entidad.key,
-                                                                            document_type: tipo.key
-                                                                        })
-                                                                    }}
-                                                                    className="filtros-facetados-entidad-boton"
-                                                                >
-                                                                    {entidadOpen ? (
-                                                                        <ChevronDown size={14} />
-                                                                    ) : (
-                                                                        <ChevronRight size={14} />
-                                                                    )}
-                                                                    <span className="filtros-facetados-entidad-nombre">
-                                                                        {entidad.key}
-                                                                    </span>
-                                                                    <span className="filtros-facetados-contador-secundario">
-                                                                        {entidad.doc_count}
-                                                                    </span>
-                                                                </button>
-
-                                                                {entidadOpen && (
-                                                                    <div className="filtros-facetados-anios">
-                                                                        {entidad.year.buckets.map(year => (
-                                                                            <button
-                                                                                key={year.key}
-                                                                                className="filtros-facetados-anio"
-                                                                                onClick={() => onFilter({
-                                                                                    entity: entidad.key,
-                                                                                    document_type: tipo.key,
-                                                                                    years: {
-                                                                                        year_to: year.key_as_string,
-                                                                                        year_from: year.key_as_string
-                                                                                    }
-                                                                                })}
-                                                                            >
-                                                                                {year.key_as_string} ({year.doc_count})
-                                                                            </button>
-                                                                        ))}
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        );
-                                                    })}
-                                            </div>
-                                            )}
+                                {(fragments?.tipo.normativa.length ?? 0) > 0 && (
+                                    <div className="separador-filtros-facetados">
+                                        <div className="titulo-separador-filtros-facetados">
+                                            Normativa:
                                         </div>
-                                    );
-                                })}
+                                        <div className="contenedor-contenido-tipos-filtros-facetados">
+                                            {fragments?.tipo.normativa.map((tipo, index) => {
+                                                const tipoOpen = openTipos.has(tipo.key);
+
+                                                return (
+                                                    <div key={tipo.key} className="filtros-facetados-tipo" style={index == fragments?.tipo.normativa.length -1 ? {border:"none"} : undefined}>
+                                                        <button
+                                                            onClick={() => {
+                                                                toggle(setOpenTipos, tipo.key)
+                                                                onFilter({
+                                                                    document_type: tipo.key
+                                                                })
+                                                            }}
+                                                            className="filtros-facetados-tipo-boton"
+                                                        >
+                                                            {tipoOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                                                            <span className="filtros-facetados-tipo-nombre">
+                                                                {tipo.key}
+                                                            </span>
+                                                            <span className="filtros-facetados-contador">
+                                                                {tipo.doc_count}
+                                                            </span>
+                                                        </button>
+
+                                                        {tipoOpen && (
+                                                            <div className="filtros-facetados-entidades">
+                                                                {tipo.entidad.buckets.map(entidad => {
+                                                                    const entidadKey = `${tipo.key}-${entidad.key}`;
+                                                                    const entidadOpen = openEntidades.has(entidadKey);
+
+                                                                    return (
+                                                                        <div key={entidadKey} className="filtros-facetados-entidad">
+                                                                            <button
+                                                                                onClick={() => {
+                                                                                    toggle(setOpenEntidades, entidadKey)
+                                                                                    onFilter({
+                                                                                        entity: entidad.key,
+                                                                                        document_type: tipo.key
+                                                                                    })
+                                                                                }}
+                                                                                className="filtros-facetados-entidad-boton"
+                                                                            >
+                                                                                {entidadOpen ? (
+                                                                                    <ChevronDown size={14} />
+                                                                                ) : (
+                                                                                    <ChevronRight size={14} />
+                                                                                )}
+                                                                                <span className="filtros-facetados-entidad-nombre">
+                                                                                    {entidad.key}
+                                                                                </span>
+                                                                                <span className="filtros-facetados-contador-secundario">
+                                                                                    {entidad.doc_count}
+                                                                                </span>
+                                                                            </button>
+
+                                                                            {entidadOpen && (
+                                                                                <div className="filtros-facetados-anios">
+                                                                                    {entidad.year.buckets.map(year => (
+                                                                                        <button
+                                                                                            key={year.key}
+                                                                                            className="filtros-facetados-anio"
+                                                                                            onClick={() => onFilter({
+                                                                                                entity: entidad.key,
+                                                                                                document_type: tipo.key,
+                                                                                                years: {
+                                                                                                    year_to: year.key_as_string,
+                                                                                                    year_from: year.key_as_string
+                                                                                                }
+                                                                                            })}
+                                                                                        >
+                                                                                            {year.key_as_string} ({year.doc_count})
+                                                                                        </button>
+                                                                                    ))}
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                        </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+                                {(fragments?.tipo.jurisprudencia.length ?? 0) > 0 && (
+                                    <div className="separador-filtros-facetados">
+                                        <div className="titulo-separador-filtros-facetados">
+                                            Jurisprudencia:
+                                        </div>
+                                        <div className="contenedor-contenido-tipos-filtros-facetados">
+                                            {fragments?.tipo.jurisprudencia.map((tipo, index) => {
+                                                const tipoOpen = openTipos.has(tipo.key);
+
+                                                return (
+                                                    <div key={tipo.key} className="filtros-facetados-tipo" style={index == fragments?.tipo.jurisprudencia.length -1 ? {border:"none"} : undefined}>
+                                                        <button
+                                                            onClick={() => {
+                                                                toggle(setOpenTipos, tipo.key)
+                                                                onFilter({
+                                                                    document_type: tipo.key
+                                                                })
+                                                            }}
+                                                            className="filtros-facetados-tipo-boton"
+                                                        >
+                                                            {tipoOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                                                            <span className="filtros-facetados-tipo-nombre">
+                                                                {tipo.key}
+                                                            </span>
+                                                            <span className="filtros-facetados-contador">
+                                                                {tipo.doc_count}
+                                                            </span>
+                                                        </button>
+
+                                                        {tipoOpen && (
+                                                            <div className="filtros-facetados-entidades">
+                                                                {tipo.entidad.buckets.map(entidad => {
+                                                                    const entidadKey = `${tipo.key}-${entidad.key}`;
+                                                                    const entidadOpen = openEntidades.has(entidadKey);
+
+                                                                    return (
+                                                                        <div key={entidadKey} className="filtros-facetados-entidad">
+                                                                            <button
+                                                                                onClick={() => {
+                                                                                    toggle(setOpenEntidades, entidadKey)
+                                                                                    onFilter({
+                                                                                        entity: entidad.key,
+                                                                                        document_type: tipo.key
+                                                                                    })
+                                                                                }}
+                                                                                className="filtros-facetados-entidad-boton"
+                                                                            >
+                                                                                {entidadOpen ? (
+                                                                                    <ChevronDown size={14} />
+                                                                                ) : (
+                                                                                    <ChevronRight size={14} />
+                                                                                )}
+                                                                                <span className="filtros-facetados-entidad-nombre">
+                                                                                    {entidad.key}
+                                                                                </span>
+                                                                                <span className="filtros-facetados-contador-secundario">
+                                                                                    {entidad.doc_count}
+                                                                                </span>
+                                                                            </button>
+
+                                                                            {entidadOpen && (
+                                                                                <div className="filtros-facetados-anios">
+                                                                                    {entidad.year.buckets.map(year => (
+                                                                                        <button
+                                                                                            key={year.key}
+                                                                                            className="filtros-facetados-anio"
+                                                                                            onClick={() => onFilter({
+                                                                                                entity: entidad.key,
+                                                                                                document_type: tipo.key,
+                                                                                                years: {
+                                                                                                    year_to: year.key_as_string,
+                                                                                                    year_from: year.key_as_string
+                                                                                                }
+                                                                                            })}
+                                                                                        >
+                                                                                            {year.key_as_string} ({year.doc_count})
+                                                                                        </button>
+                                                                                    ))}
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                        </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+                                {(fragments?.tipo.other.length ?? 0) > 0 && (
+                                    <div className="separador-filtros-facetados">
+                                        <div className="titulo-separador-filtros-facetados">
+                                            Demás documentos:
+                                        </div>
+                                        <div className="contenedor-contenido-tipos-filtros-facetados">
+                                            {fragments?.tipo.other.map((tipo, index) => {
+                                                const tipoOpen = openTipos.has(tipo.key);
+
+                                                return (
+                                                    <div key={tipo.key} className="filtros-facetados-tipo" style={index == fragments?.tipo.other.length -1 ? {border:"none"} : undefined}>
+                                                        <button
+                                                            onClick={() => {
+                                                                toggle(setOpenTipos, tipo.key)
+                                                                onFilter({
+                                                                    document_type: tipo.key
+                                                                })
+                                                            }}
+                                                            className="filtros-facetados-tipo-boton"
+                                                        >
+                                                            {tipoOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                                                            <span className="filtros-facetados-tipo-nombre">
+                                                                {tipo.key}
+                                                            </span>
+                                                            <span className="filtros-facetados-contador">
+                                                                {tipo.doc_count}
+                                                            </span>
+                                                        </button>
+
+                                                        {tipoOpen && (
+                                                            <div className="filtros-facetados-entidades">
+                                                                {tipo.entidad.buckets.map(entidad => {
+                                                                    const entidadKey = `${tipo.key}-${entidad.key}`;
+                                                                    const entidadOpen = openEntidades.has(entidadKey);
+
+                                                                    return (
+                                                                        <div key={entidadKey} className="filtros-facetados-entidad">
+                                                                            <button
+                                                                                onClick={() => {
+                                                                                    toggle(setOpenEntidades, entidadKey)
+                                                                                    onFilter({
+                                                                                        entity: entidad.key,
+                                                                                        document_type: tipo.key
+                                                                                    })
+                                                                                }}
+                                                                                className="filtros-facetados-entidad-boton"
+                                                                            >
+                                                                                {entidadOpen ? (
+                                                                                    <ChevronDown size={14} />
+                                                                                ) : (
+                                                                                    <ChevronRight size={14} />
+                                                                                )}
+                                                                                <span className="filtros-facetados-entidad-nombre">
+                                                                                    {entidad.key}
+                                                                                </span>
+                                                                                <span className="filtros-facetados-contador-secundario">
+                                                                                    {entidad.doc_count}
+                                                                                </span>
+                                                                            </button>
+
+                                                                            {entidadOpen && (
+                                                                                <div className="filtros-facetados-anios">
+                                                                                    {entidad.year.buckets.map(year => (
+                                                                                        <button
+                                                                                            key={year.key}
+                                                                                            className="filtros-facetados-anio"
+                                                                                            onClick={() => onFilter({
+                                                                                                entity: entidad.key,
+                                                                                                document_type: tipo.key,
+                                                                                                years: {
+                                                                                                    year_to: year.key_as_string,
+                                                                                                    year_from: year.key_as_string
+                                                                                                }
+                                                                                            })}
+                                                                                        >
+                                                                                            {year.key_as_string} ({year.doc_count})
+                                                                                        </button>
+                                                                                    ))}
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                        </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
