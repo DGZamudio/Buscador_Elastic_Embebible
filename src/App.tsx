@@ -15,6 +15,7 @@ import NoResults from "./components/ui/NoResults";
 import FilterNumber from "./components/search/FilterNumber";
 import FragmentedFilters from "./components/search/FragmentedFiltersPanel";
 import AiMessageCard from "./components/ui/AiMessageCard";
+import FilterSelect from "./components/search/FilterSelect";
 
 export default function Buscador() {
   const {
@@ -34,7 +35,8 @@ export default function Buscador() {
     setSelectedFacetaFilters,
     isTyping,
     aiResponse,
-    loadingAiResponse
+    loadingAiResponse,
+    searchFiltersOptions
   } = useSearch();
 
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
@@ -224,8 +226,9 @@ export default function Buscador() {
                         placeholder="Separa las palabras con espacios"
                     />
                     <div className='fila-filtros'>
-                        <FilterText 
-                            value={filters.document_type}
+                        <FilterSelect 
+                            value={filters?.document_type}
+                            options={(searchFiltersOptions?.tipos.buckets ?? [])}
                             onChange={(tipo_doc) => setFilters(prev => ({
                                 ...prev,
                                 document_type: tipo_doc
@@ -237,8 +240,9 @@ export default function Buscador() {
                             label="Define el tipo de documento:"
                             placeholder="Ej: Leyes"
                         />
-                        <FilterText 
-                            value={filters.entity}
+                        <FilterSelect 
+                            value={filters?.entity}
+                            options={(searchFiltersOptions?.entidades.buckets ?? [])}
                             onChange={(entidad) => setFilters(prev => ({
                                 ...prev,
                                 entity: entidad

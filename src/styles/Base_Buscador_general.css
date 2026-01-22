@@ -142,6 +142,7 @@ html {
   --colorBordesFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
   --colorBordesFacetaInterno: color-mix(in srgb, var(--colorNegro-escala-2) 40%, transparent);
   --colorContadorFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 70%, transparent);
+  --colorBackgroundFacetaActiva: color-mix(in srgb, var(--colorNegro-escala-2) 10%, transparent);
 
   /* -> FACETA */
 

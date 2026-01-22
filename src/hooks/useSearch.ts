@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { fragmentFilters, getAiMessage, regularSearch, semanticSearch } from "../services/search.service";
-import type { aiResponseType, citationType, FragmentedFilters, SearchFilters, SearchHit, searchType } from "../types/search";
+import { fragmentFilters, getAiMessage, getSearchFilters, regularSearch, semanticSearch } from "../services/search.service";
+import type { aiResponseType, citationType, FragmentedFilters, initialFilters, SearchFilters, SearchHit, searchType } from "../types/search";
 
 export function useSearch() {
     const [query, setQuery] = useState<string>("");
@@ -10,6 +10,7 @@ export function useSearch() {
     const [page, setPage] = useState<number>(0);
     const [pages, setPages] = useState<number>(0);
     const [filters, setFilters] = useState<SearchFilters>({});
+    const [searchFiltersOptions, setSearchFiltersOptions] = useState<initialFilters | null>()
     const [selectedFacetaFilters, setSelectedFacetaFilters] = useState<SearchFilters>({});
     const [fragmentedFilters, setFragmentedFilters] = useState<FragmentedFilters | null>();
     const [loading, setLoading] = useState<boolean>(false)
@@ -63,6 +64,14 @@ export function useSearch() {
         .finally(() => setLoadingFragments(false))
 
     }, [query, normalizedFilters, hasActiveFilters])
+
+    useEffect(() => {
+        getSearchFilters()
+        .then((data) => {
+            setSearchFiltersOptions(data)
+        })
+        .catch(console.error)
+    }, []) // Solo se ejecuta una vez, trae las entidades y tipos para seleccionar asi mejorando la busqueda mediante estos filtros
 
     useEffect(() => {
         setPage(0);
@@ -156,7 +165,8 @@ export function useSearch() {
         setSearchType,
         isTyping,
         aiResponse,
-        loadingAiResponse
+        loadingAiResponse,
+        searchFiltersOptions
     };
 }
 
