@@ -70,7 +70,7 @@ function SearchBar({
         {visibleJurIaButton && (
             <a className="boton-modo-jur-ia" href="https://www.juria.co" target="_blank">
                 <Brain />
-                Modo JurIa
+                Modo JurIA
             </a>
         )}
     </form>
