@@ -1,17 +1,13 @@
 "use client"
 import "../../styles/Componentes_Modales.css"
 import { useEffect } from "react"
-import { StepBack, StepForward } from "lucide-react"
 import type { ResultsModalProps } from "../../types/search"
 
 export default function ResultsModal({
   open,
   onClose,
   onRender,
-  children,
-  page,
-  pages,
-  setPage
+  children
 }: ResultsModalProps) {
     useEffect(() => {
         if (!open) return
@@ -53,7 +49,7 @@ export default function ResultsModal({
                     {children}
                 </div>
 
-                <div className="modal-resultados-footer">
+                {/* <div className="modal-resultados-footer">
                     <button onClick={() => setPage(-1)} disabled={page == 0} className="modal-resultados-boton-paginacion">
                         <StepBack 
                             size={"1em"}
@@ -69,7 +65,7 @@ export default function ResultsModal({
                             size={"1em"}
                         />
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     )

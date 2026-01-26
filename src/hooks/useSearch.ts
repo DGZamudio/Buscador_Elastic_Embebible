@@ -8,7 +8,7 @@ export function useSearch() {
     const [aiResponse, setAiResponse] = useState<aiResponseType | undefined>(undefined);
     const [searchType, setSearchType] = useState<searchType>("title");
     const [page, setPage] = useState<number>(0);
-    const [pages, setPages] = useState<number>(0);
+    const [limit, setLimit] = useState<number>(10);
     const [filters, setFilters] = useState<SearchFilters>({});
     const [selectedFacetaFilters, setSelectedFacetaFilters] = useState<SearchFilters>({});
     const [fragmentedFilters, setFragmentedFilters] = useState<FragmentedFilters | null>();
@@ -65,7 +65,8 @@ export function useSearch() {
     }, [query, normalizedFilters, hasActiveFilters])
 
     useEffect(() => {
-        setPage(0);
+        setLimit(10);
+        setPage(0)
     }, [query, normalizedFilters]);
 
     // Busqueda Regular
@@ -91,21 +92,24 @@ export function useSearch() {
         }
 
         const delay = setTimeout(async () => {
+            const scrollY = window.scrollY;
             setIsTyping(false)
             setLoading(true);
             try {
-                const data = await regularSearch(query, localFilters, localHasActiveFilters, page);
+                const data = await regularSearch(query, localFilters, localHasActiveFilters, page, limit);
                 setResults(data?.hits ?? []);
-                setPages(data.max_pages);
             } catch (error) {
                 console.error(error);
             } finally {
                 setLoading(false);
+                requestAnimationFrame(() => {
+                    window.scrollTo({ top: scrollY });
+                });
             }
         }, 300); // debounce
 
         return () => clearTimeout(delay);
-    }, [query, page, normalizedFilters, hasActiveFilters]);
+    }, [page, query, limit, normalizedFilters, hasActiveFilters]);
 
     // Busqueda semantica
     useEffect(() => {
@@ -116,8 +120,10 @@ export function useSearch() {
 
         if (searchType !== "semantic") return
 
+        const scrollY = window.scrollY;
+
         setLoading(true)
-        if (page === 0) {
+        if (limit === 10) {
             memoizedUseGetFragmentedFilters()
             setLoadingAiResponse(true)
             getAiMessage(query)
@@ -129,14 +135,18 @@ export function useSearch() {
                 .finally(() => setLoadingAiResponse(false))
             })
         }
-        semanticSearch(query, normalizedFilters, hasActiveFilters, page)
+        semanticSearch(query, normalizedFilters, hasActiveFilters, page, limit)
         .then((data) => {
             setResults(data?.hits ?? [])
-            setPages(data?.max_pages)
         })
         .catch(console.error)
-        .finally(() => setLoading(false))
-    }, [page, normalizedFilters, hasActiveFilters, searchType])
+        .finally(() => {
+            setLoading(false)
+            requestAnimationFrame(() => {
+                window.scrollTo({ top: scrollY });
+            });
+        })
+    }, [page, limit, normalizedFilters, hasActiveFilters, searchType])
 
     return {
         query,
@@ -149,9 +159,10 @@ export function useSearch() {
         hasActiveFilters,
         fragmentedFilters,
         loadingFragments,
-        pages,
         page,
         setPage,
+        limit,
+        setLimit,
         searchType,
         setSearchType,
         isTyping,

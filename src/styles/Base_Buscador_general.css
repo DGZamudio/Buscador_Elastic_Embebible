@@ -12,6 +12,7 @@ html {
 
     --letra-xs: 0.75rem;
     --letra-sm: 0.875rem;
+    --letra-md: 1rem;
     --letra-lg: 1.125rem;
     --letra-2xl: 1.5rem;
     --letra-3xl: 1.875rem;
@@ -103,6 +104,7 @@ html {
   --colorBackgroundResultados: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
   --colorBordesResultados: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
   --colorResultadoHover: color-mix(in srgb, var(--colorGris) 20%, transparent);
+  --colorOpcionVentanaResultadoHover: var(--colorAzul-oscuro);
   --colorTituloResultado: var(--colorAzul-oscuro);
   --colorCaracteristicasResultado: var(--colorNegro);
   --colorContenidoResultado: var(--colorGris-escala-3);

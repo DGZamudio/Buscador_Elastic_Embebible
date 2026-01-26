@@ -8,13 +8,12 @@ import SearchResultsPanel from "./components/search/SearchResultsPanel";
 import { useSearch } from "./hooks/useSearch";
 import { useState } from "react";
 import ResultsModal from "./components/search/SearchResultsModal";
-import SearchResultsContent from "./components/search/SearchResultsContent";
 import Loader from "./components/ui/Loader";
 import Typing from "./components/ui/isTyping"
 import NoResults from "./components/ui/NoResults";
 import FilterNumber from "./components/search/FilterNumber";
 import FragmentedFilters from "./components/search/FragmentedFiltersPanel";
-import AiMessageCard from "./components/ui/AiMessageCard";
+import ResultsWindowModal from "./components/search/ResultsWindowModal";
 
 export default function Buscador() {
   const {
@@ -27,14 +26,12 @@ export default function Buscador() {
     hasActiveFilters,
     fragmentedFilters,
     loadingFragments,
-    page,
-    pages,
-    setPage,
     setSearchType,
     setSelectedFacetaFilters,
     isTyping,
     aiResponse,
-    loadingAiResponse
+    loadingAiResponse,
+    setLimit
   } = useSearch();
 
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
@@ -92,16 +89,6 @@ export default function Buscador() {
                         setSearchType("title")
                         setResultsOpen(false)
                     }}
-                    page={page}
-                    pages={pages}
-                    setPage={(delta) => 
-                        setPage(prev => {
-                            const next = (prev ?? 0) + delta;
-                            if (next < 0) return 0;
-                            if (next >= (pages ?? 0)) return (pages ?? 0) - 1;
-                            return next;
-                        })
-                    }
                 >
                     <div className="contenedor-resultados-modal">
                         <div className="layout-resultados">
@@ -125,16 +112,12 @@ export default function Buscador() {
                             </aside>
                             
                             <section className="contenido-resultados">
-                                {(aiResponse || loadingAiResponse) && (
-                                    <AiMessageCard
-                                        message={aiResponse?.message}
-                                        citations={aiResponse?.citations}
-                                        loading={loadingAiResponse}
-                                    />
-                                )}
-                                <SearchResultsContent 
+                                <ResultsWindowModal 
+                                    aiResponse={aiResponse ?? null}
                                     results={results}
-                                    visible
+                                    loadingAiResponse={loadingAiResponse}
+                                    handleNextResults={() => setLimit(prev => prev + 10)}
+                                    disableVerMas={loading}
                                 />
                             </section>
                         </div>

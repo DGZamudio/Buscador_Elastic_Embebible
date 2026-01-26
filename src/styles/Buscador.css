@@ -435,3 +435,93 @@
     background: none;
     font-weight: bold;
 }
+
+/* VENTANA RESULTADOS */
+
+.contenedor-ventana-resultados {
+    margin-top: 0.75rem;
+    width: 100%;
+    background-color: var(--colorBackgroundResultados);
+    border: 1px solid var(--colorBordesResultados);
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 40px var(--colorBackgroundResultados);
+    overflow: hidden;
+    padding: 1rem;
+    overscroll-behavior: contain;
+}
+
+.contenedor-header-ventana-resultados {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid var(--colorBordesResultados);
+}
+
+.ventana-resultados-opcion {
+    flex: 1;
+    color: var(--colorAzul-oscuro);
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    font-size: var(--letra-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    border: none;
+    background: none;
+}
+
+.ventana-resultados-opcion:not(:last-child) {
+    border-right: 1px solid var(--colorBordesResultados);
+}
+
+.ventana-resultados-opcion:hover {
+    background-color: var(--colorOpcionVentanaResultadoHover);
+    color: var(--colorBlanco);
+}
+
+.ventana-resultados-opcion-activa {
+    font-weight: bolder !important;
+    background-color: var(--colorOpcionVentanaResultadoHover) !important;
+    color: var(--colorBlanco) !important;
+}
+
+.contenedor-contenido-ventana-resultados {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contenedor-ver-mas-resultados {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 5px 20px;
+}
+
+.contenedor-resultados-busqueda-ventana {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton-ver-mas-resultados {
+    padding: 7px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--colorBordesResultados);
+    background-color: var(--colorBackgroundBotonVerMasResultados);
+    color: var(--colorAzul-oscuro);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.boton-ver-mas-resultados:hover {
+    background-color: var(--colorOpcionVentanaResultadoHover);
+    color: var(--colorBlanco);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* -> VENTANA RESULTADOS */

@@ -156,9 +156,6 @@ export interface ResultsModalProps {
   onClose  : () => void;
   onRender : () => void;
   children   : React.ReactNode;
-  page       : number;
-  pages      : number;
-  setPage    : (numero: number) => void;
 }
 
 export interface LoaderProps {
@@ -197,4 +194,12 @@ export interface AiMessageCardProps {
     message?   : string;
     citations? : citationType[];
     loading    : boolean;
+}
+
+export interface ResultsWindowModalProps {
+    aiResponse        : aiResponseType | null;
+    results           : SearchHit[];
+    loadingAiResponse : boolean;
+    handleNextResults : () => void;
+    disableVerMas     : boolean;
 }
