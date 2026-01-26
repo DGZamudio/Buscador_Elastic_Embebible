@@ -10,7 +10,7 @@ function SearchBar({
     onOpenFilters,
     onCleanFilters,
     filterActive,
-    placeholder = "Buscar en Astrea...",
+    placeholder = "Buscar en Creg...",
     visibleJurIaButton 
 }: SearchBarProps) {
     const handleSubmit = () => {
