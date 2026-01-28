@@ -86,14 +86,9 @@ export interface FilterTextProps {
   placeholder : string;
 }
 
-type SelectOption = {
-    key   : string;
-    value : string;
-}
-
 export interface FilterSelectProps {
-  value       : string;
-  options     : SelectOption[];
+  value?      : string;
+  options     : AggBucket[];
   onChange    : (value: string) => void;
   clear       : () => void;
   label       : string;
@@ -202,4 +197,5 @@ export interface ResultsWindowModalProps {
     loadingAiResponse : boolean;
     handleNextResults : () => void;
     disableVerMas     : boolean;
+    hideVerMas        : boolean;
 }

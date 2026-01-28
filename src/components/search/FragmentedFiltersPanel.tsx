@@ -81,7 +81,7 @@ export default function FragmentedFilters({
                                                                     document_type: tipo.key
                                                                 })
                                                             }}
-                                                            className="filtros-facetados-tipo-boton"
+                                                            className={`filtros-facetados-tipo-boton ${tipoOpen && "faceta-open"}`}
                                                         >
                                                             {tipoOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                                                             <span className="filtros-facetados-tipo-nombre">
@@ -108,7 +108,7 @@ export default function FragmentedFilters({
                                                                                         document_type: tipo.key
                                                                                     })
                                                                                 }}
-                                                                                className="filtros-facetados-entidad-boton"
+                                                                                className={`filtros-facetados-entidad-boton ${entidadOpen && "faceta-open"}`}
                                                                             >
                                                                                 {entidadOpen ? (
                                                                                     <ChevronDown size={14} />
@@ -172,7 +172,7 @@ export default function FragmentedFilters({
                                                                     document_type: tipo.key
                                                                 })
                                                             }}
-                                                            className="filtros-facetados-tipo-boton"
+                                                            className={`filtros-facetados-tipo-boton ${tipoOpen && "faceta-open"}`}
                                                         >
                                                             {tipoOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                                                             <span className="filtros-facetados-tipo-nombre">
@@ -199,7 +199,7 @@ export default function FragmentedFilters({
                                                                                         document_type: tipo.key
                                                                                     })
                                                                                 }}
-                                                                                className="filtros-facetados-entidad-boton"
+                                                                                className={`filtros-facetados-entidad-boton ${entidadOpen && "faceta-open"}`}
                                                                             >
                                                                                 {entidadOpen ? (
                                                                                     <ChevronDown size={14} />
@@ -263,7 +263,7 @@ export default function FragmentedFilters({
                                                                     document_type: tipo.key
                                                                 })
                                                             }}
-                                                            className="filtros-facetados-tipo-boton"
+                                                            className={`filtros-facetados-tipo-boton ${tipoOpen && "faceta-open"}`}
                                                         >
                                                             {tipoOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                                                             <span className="filtros-facetados-tipo-nombre">
@@ -290,7 +290,7 @@ export default function FragmentedFilters({
                                                                                         document_type: tipo.key
                                                                                     })
                                                                                 }}
-                                                                                className="filtros-facetados-entidad-boton"
+                                                                                className={`filtros-facetados-entidad-boton ${entidadOpen && "faceta-open"}`}
                                                                             >
                                                                                 {entidadOpen ? (
                                                                                     <ChevronDown size={14} />

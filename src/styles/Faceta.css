@@ -164,3 +164,8 @@
 .titulo-separador-filtros-facetados {
     font-weight: bold;
 }
+
+.faceta-open {
+    background-color: var(--colorBackgroundFacetaActiva) !important;
+    border-radius: 10px;
+}

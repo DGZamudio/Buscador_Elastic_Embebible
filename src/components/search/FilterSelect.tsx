@@ -17,7 +17,7 @@ function FilterText({
                 {label}
             </label>
             <div className="contenedor-input-casilla-numero-filtro">
-                <select className="campo-select-filtro">
+                <select onChange={(e) => onChange(e.target.value)} className="campo-select-filtro">
                     {options.map((opcion) => (
                         <option key={opcion.key} value={opcion.key}>{opcion.key}</option>
                     ))}
@@ -30,8 +30,8 @@ function FilterText({
                     type="text"
                 />
                 {(value ?? "") !== "" && (
-                    <button onClick={clear}>
-                        <X className="boton-limpiar-filtro" />
+                    <button className="boton-limpiar-filtro" onClick={clear}>
+                        <X />
                     </button>
                 )}
             </div>

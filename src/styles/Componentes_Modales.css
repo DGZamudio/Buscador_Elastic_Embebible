@@ -210,3 +210,7 @@
 .modal-resultados-indicador-pagina {
     font-size: var(--letra-sm);
 }
+
+.filtros-modal-contenedor {
+    margin: 8rem auto 0 auto;
+}

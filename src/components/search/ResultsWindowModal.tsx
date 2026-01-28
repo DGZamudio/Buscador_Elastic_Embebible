@@ -8,7 +8,8 @@ export default function ResultsWindowModal({
     results,
     loadingAiResponse,
     handleNextResults,
-    disableVerMas
+    disableVerMas,
+    hideVerMas
 } : ResultsWindowModalProps) {
     const [windowResponseMode, setWindowResponseMode] = useState<"ai" | "results">("ai");
   return (
@@ -49,9 +50,11 @@ export default function ResultsWindowModal({
                         results={results}
                         visible
                     />
-                    <button disabled={disableVerMas} onClick={() => handleNextResults()} className="boton-ver-mas-resultados">
-                        Ver mas
-                    </button>
+                    {!hideVerMas && (
+                        <button disabled={disableVerMas} onClick={() => handleNextResults()} className="boton-ver-mas-resultados">
+                            Ver mas
+                        </button>
+                    )}
                 </div>
 
             )}

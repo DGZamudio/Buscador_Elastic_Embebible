@@ -132,3 +132,19 @@ export async function getAiMessage(
 
     return response
 }
+
+export async function getSearchFilters(
+
+) {
+    const response = await fetch(
+        'http://localhost:8000/api/v1/search/filters'
+    )
+
+    if (!response.ok) {
+        throw new Error("Error HTTP");
+    }
+
+    const data = await response.json();
+
+    return data?.filters ?? null;
+}
