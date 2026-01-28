@@ -11,6 +11,7 @@ export interface SearchHit {
         "Sigla-Entidad" : string;
         Nombre          : string;
         NombreEpigrafe  : string;
+        "doc-name"      : string;
     };
     highlight? : {
         Epigrafe? : string[];
