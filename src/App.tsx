@@ -15,6 +15,7 @@ import FilterNumber from "./components/search/FilterNumber";
 import FragmentedFilters from "./components/search/FragmentedFiltersPanel";
 import ResultsWindowModal from "./components/search/ResultsWindowModal";
 import FilterSelect from "./components/search/FilterSelect";
+import { Lightbulb } from "lucide-react";
 
 export default function Buscador() {
   const {
@@ -49,7 +50,7 @@ export default function Buscador() {
                     Búsqueda
                 </h1>
                 <p className='descripcion-buscador'>
-                    Puede buscar por palabras dentro del documento, por frases, por palabras clave y por los datos que identifican un documento, puede prefijar los resultados para un tipo de documento antes de realizar la búsqueda, o puede filtrar los resultados por diferentes opciones.
+                    Busca registros por palabras clave o datos del documento
                 </p>
             </div>
 
@@ -77,6 +78,20 @@ export default function Buscador() {
                 <Loader visible={!isTyping && loading}/>
 
                 <NoResults variant="sugerencia" visible={!isTyping && !loading && query.length > 0 && results.length == 0} />
+
+                <div className="contenedor-consejos-busqueda">
+                    <div className="titulo-conejos-busqueda">
+                        <Lightbulb size="1.75rem" />
+                        <h2>
+                            Consejos de búsqueda
+                        </h2>
+                    </div>
+                    <ul className="lista-consejos-busqueda">
+                        <li>Usa palabras clave específicas para mejores resultados.</li>
+                        <li>Combina múltiples términos para afinar su búsqueda.</li>
+                        <li>Active el Modo JurIA para búsquedas jurídicas especializadas.</li>
+                    </ul>
+                </div>
 
                 <div className="panel-resultados-flotante">
                     <SearchResultsPanel 

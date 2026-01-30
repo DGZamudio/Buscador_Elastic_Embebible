@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
-  --font-work-sans: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-work-sans: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
@@ -16,6 +16,7 @@ html {
     --letra-lg: 1.125rem;
     --letra-2xl: 1.5rem;
     --letra-3xl: 1.875rem;
+    --letra-4xl: 2.45rem;
     --letra-5xl: 3rem;
 
     --reestablecerLetra: 1;
@@ -66,6 +67,7 @@ html {
   --colorAzul: #00aeef;
   --colorAzul-claro: #2cb4e6;
   --colorAzul-oscuro: #0081b1;
+  --colorAzul-oscuro-escala2: #1F96B2;
   --colorVino: #7a1f1f;
   --colorVino-escala: #8c2a2a;
   --colorBlanco: #FFF;
@@ -78,6 +80,7 @@ html {
   --colorGris-escala-4: #9ca3af;
   --colorNegro: #000;
   --colorNegro-escala-2: #0f0f0f;
+  --colorNegro-escala-3: #0B1526;
 
   /* VARIABLES ESTATICAS */
   /* -> VARIABLES ESTATICAS */
@@ -86,20 +89,21 @@ html {
 :root {
   /* GENERAL PARA TODAS LAS PAGS */
   
-  --colorBackgroundGeneral: var(--colorBlanco-escala-2);
+  --colorBackgroundGeneral: var(--colorBlanco);
   --colorForegroundGeneral: var(--colorNegro-escala-2);
 
   /* -> GENERAL PARA TODAS LAS PAGS */
 
   /* BUSCADOR */
 
-  --colorTituloBuscador: var(--colorAzul);
+  --colorTituloBuscador: var(--colorAzul-oscuro-escala2);
   --colorAvisoInformativo: var(--colorGris-escala-3);
-  --colorFuncionesBarraBusqueda: var(--colorAzul);
-  --colorBackgroundBarraBusqueda: color-mix(in srgb, var(--colorBlanco-escala-2) 40%, transparent);
+  --colorFuncionesBarraBusqueda: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundBarraBusqueda: var(--colorBlanco);
+  --colorSombraBarraBusqueda: color-mix(in srgb, var(--colorAzul-oscuro-escala2) 20%, transparent);
   --colorBordesBarraBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBordesBarraBusquedaActiva: var(--colorAzul);
-  --colorBackgroundBotonBusquedaActivo: var(--colorAzul-claro);
+  --colorBordesBarraBusquedaActiva: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundBotonBusquedaActivo: var(--colorAzul-oscuro-escala2);
   --colorSimbolosActivosBarraBusqueda: var(--colorBlanco-escala-2);
   --colorBackgroundResultados: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
   --colorBordesResultados: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
@@ -111,16 +115,17 @@ html {
   --colorBackgroundSugerenciasBusqueda: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
   --colorBordeSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
   --colorHoverSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBotonModoIa: var(--colorAzul);
-  --colorBackgroundBotonModoIaHover: var(--colorAzul);
+  --colorBotonModoIa: var(--colorBlanco);
+  --colorBackgroundBotonModoIa: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundBotonModoIaHover: var(--colorAzul-oscuro-escala2);
   --colorBotonModoIaHover: var(--colorBlanco);
-  --colorBotonActivoModoIa: var(--colorAzul-claro);
+  --colorBotonActivoModoIa: var(--colorAzul-oscuro-escala2);
   /* -> BUSCADOR */
 
   /* FILTROS */
 
   --colorBordeFiltro: var(--colorNegro-escala-2);
-  --colorBordeFiltroActivo: var(--colorAzul);
+  --colorBordeFiltroActivo: var(--colorAzul-oscuro-escala2);
 
   /* -> FILTROS */
 
