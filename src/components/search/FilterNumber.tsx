@@ -17,7 +17,7 @@ function FilterNumber({
                 <input 
                     value={value ?? ""}
                     onChange={(e) => onChange(e.target.value === "" ? undefined : Number(e.target.value))}
-                    placeholder={placeholder}
+                    placeholder={placeholder ?? ""}
                     className="campo-input-filtro"
                     type="number"
                 />

@@ -15,7 +15,7 @@ import FilterNumber from "./components/search/FilterNumber";
 import FragmentedFilters from "./components/search/FragmentedFiltersPanel";
 import ResultsWindowModal from "./components/search/ResultsWindowModal";
 import FilterSelect from "./components/search/FilterSelect";
-import { Lightbulb } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function Buscador() {
   const {
@@ -73,6 +73,13 @@ export default function Buscador() {
                     visibleJurIaButton={!resultsOpen}
                 />
 
+                <div className="contenedor-boton-modo-jur-ia contenedor-boton-modo-jur-ia-mobile">
+                    <a className="boton-modo-jur-ia" href="https://www.juria.co" target="_blank">
+                        <Sparkles />
+                        Modo JurIA
+                    </a>
+                </div>
+
                 <Typing visible={isTyping && !resultsOpen} />
 
                 <Loader visible={!isTyping && loading}/>
@@ -80,17 +87,21 @@ export default function Buscador() {
                 <NoResults variant="sugerencia" visible={!isTyping && !loading && query.length > 0 && results.length == 0} />
 
                 <div className="contenedor-consejos-busqueda">
-                    <div className="titulo-conejos-busqueda">
-                        <Lightbulb size="1.75rem" />
-                        <h2>
-                            Consejos de búsqueda
-                        </h2>
+                    <div className="contenedor-contenido-consejos-busqueda">
+                        <div className="titulo-consejos-busqueda">
+                            <div className="titulo-consejos-busqueda-imagen">
+                                <img src="/lightbulb.svg" alt="" />
+                            </div>
+                            <h2>
+                                Consejos de búsqueda
+                            </h2>
+                        </div>
+                        <ul className="lista-consejos-busqueda">
+                            <li>Usa palabras clave específicas para mejores resultados.</li>
+                            <li>Combina múltiples términos para afinar su búsqueda.</li>
+                            <li>Active el Modo JurIA para búsquedas jurídicas especializadas.</li>
+                        </ul>
                     </div>
-                    <ul className="lista-consejos-busqueda">
-                        <li>Usa palabras clave específicas para mejores resultados.</li>
-                        <li>Combina múltiples términos para afinar su búsqueda.</li>
-                        <li>Active el Modo JurIA para búsquedas jurídicas especializadas.</li>
-                    </ul>
                 </div>
 
                 <div className="panel-resultados-flotante">
@@ -171,7 +182,7 @@ export default function Buscador() {
                             ...prev,
                             title: undefined
                         }))}
-                        label="Debe contener esto en el titulo:"
+                        label="Debe contener esto en el título:"
                         placeholder="Ej: Resolución del 2008"
                     />
                     <FilterText
@@ -185,7 +196,7 @@ export default function Buscador() {
                             phrase: undefined
                         }))}
                         label="Debe contener esta frase:"
-                        placeholder="Ingrese la frase"
+                        placeholder="Ingrese la frase..."
                     />
                     <FilterText
                         value={filters.not_include?.join(" ") ?? ""}
@@ -197,7 +208,7 @@ export default function Buscador() {
                             ...prev,
                             not_include: undefined
                         }))}
-                        label="NO debe contener estas palabras:"
+                        label="NO Debe contener estas palabras:"
                         placeholder="Separa las palabras con espacios"
                     />
                     <FilterText
@@ -238,8 +249,7 @@ export default function Buscador() {
                                 ...prev,
                                 document_type: undefined
                             }))}
-                            label="Define el tipo de documento:"
-                            placeholder="Ej: Leyes"
+                            label="Define el tipo de documento"
                         />
                         <FilterSelect 
                             value={filters?.entity}
@@ -252,8 +262,7 @@ export default function Buscador() {
                                 ...prev,
                                 entity: undefined
                             }))}
-                            label="Escribe la entidad que remite el documento:"
-                            placeholder="Ej: Procuraduría General de la Nación"
+                            label="Entidad que remite el documento"
                         />
                     </div>
                     <div className="fila-filtros">
@@ -273,8 +282,7 @@ export default function Buscador() {
                                     query: undefined
                                 }
                             }))}
-                            label="Estas palabras deben estan cerca:"
-                            placeholder="Ej: Ley resolución consejo"
+                            label="Estas palabras deben estan cerca"
                         />
                         <FilterNumber 
                             value={filters.proximity?.distance}
@@ -285,8 +293,7 @@ export default function Buscador() {
                                     distance: numero
                                 }
                             }))}
-                            label="Distancia entre las palabras cercanas:"
-                            placeholder="Por defecto 8"
+                            label="Distancia entre las palabras"
                         />
                     </div>
                     <FilterYears

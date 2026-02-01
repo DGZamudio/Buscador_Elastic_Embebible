@@ -16,27 +16,28 @@
     position: relative;
     margin: 8rem auto 0 auto;
     width: 100%;
-    max-width: var(--container-3xl);
+    max-width: var(--container-4xl);
 }
 
 .filtros-modal-caja {
     background-color: var(--colorBackgroundModales);
     border: 1px solid var(--colorBordesModales);
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .filtros-modal-encabezado {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--colorBordesModales);
+    justify-content: flex-end;
+    padding: 1rem 1.5rem 0rem;
 }
 
 .filtros-modal-titulo {
-    font-size: 1.125rem;
-    font-weight: 600;
+    margin: 0;
+    font-size: var(--letra-2xl);
+    color: var(--colorTituloModales);
+    font-weight: bold;
 }
 
 .filtros-modal-boton-cerrar {
@@ -54,23 +55,23 @@
 .filtros-modal-contenido {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 1.25rem 1.5rem;
+    gap: 1.6rem;
+    padding: 0px 3.5rem 1.25rem;
 }
 
 .filtros-modal-pie {
     display: flex;
     justify-content: flex-end;
     gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    border-top: 1px solid var(--colorBordesModales);
+    padding: 1rem 3.5rem;
 }
 
 .filtros-modal-boton-cancelar {
-    background: none;
+    background-color: var(--colorBackgroundBotonCancelarModales);
     border: none;
+    border-radius: 8px;
+    padding: 5px 2.5rem;
     font-size: 0.875rem;
-    color: var(--colorBotonSecundarioModales);
     cursor: pointer;
     transition: color 0.2s ease;
 }
@@ -84,11 +85,12 @@
     color: var(--colorBlanco);
     border: none;
     border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 5.5rem;
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-weight: bold;
 }
 
 .filtros-modal-boton-aplicar:hover {
@@ -209,8 +211,4 @@
 
 .modal-resultados-indicador-pagina {
     font-size: var(--letra-sm);
-}
-
-.filtros-modal-contenedor {
-    margin: 8rem auto 0 auto;
 }

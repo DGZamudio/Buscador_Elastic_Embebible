@@ -16,7 +16,7 @@ function FilterText({
             <label className="etiqueta-campo-filtro">
                 {label}
             </label>
-            <div className="contenedor-input-casilla-numero-filtro">
+            <div className="contenedor-input-casilla-select-filtro">
                 <select onChange={(e) => onChange(e.target.value)} className="campo-select-filtro">
                     {options.map((opcion) => (
                         <option key={opcion.key} value={opcion.key}>{opcion.key}</option>
@@ -25,7 +25,7 @@ function FilterText({
                 <input 
                     value={value ?? ""}
                     onChange={(e) => onChange(e.target.value)}
-                    placeholder={placeholder}
+                    placeholder={placeholder ?? ""}
                     className="campo-input-filtro"
                     type="text"
                 />

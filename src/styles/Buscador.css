@@ -8,7 +8,7 @@
 .contenedor-main {
     display: flex;
     flex-direction: column;
-    gap: 8;
+    gap: 1rem;
     align-items: center;
     width: 100%;
 }
@@ -26,12 +26,12 @@
 
 .titulo-buscador {
   color: var(--colorTituloBuscador);
-  font-size: var(--letra-3xl);
+  font-size: var(--letra-5xl);
   margin-bottom: 0px;
 }
 
 .descripcion-buscador {
-  font-size: var(--letra-2xl);
+  font-size: var(--letra-3xl);
   max-width: var(--container-2xl);
   text-align: center;
   font-weight: lighter;
@@ -44,6 +44,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 25px;
 }
 
 .panel-resultados-flotante {
@@ -99,6 +100,17 @@
   }
 }
 
+.contenedor-consejos-busqueda {
+    width: 100%;
+    max-width: var(--container-5xl);
+}
+
+.contenedor-contenido-consejos-busqueda {
+    background-color: var(--colorBackgroundTarjetaConsejosBusqueda);
+    border-radius: 12px;
+    padding: 25px;
+}
+
 /* Barra de busqueda */
 .buscador-formulario {
     display: flex;
@@ -120,8 +132,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1.25rem;
+    margin-right: 1.875rem;
 }
+
+.contenedor-boton-modo-jur-ia-mobile {
+    display: none !important;
+}
+
+@media (max-width: 556px) {
+  .contenedor-boton-modo-jur-ia {
+    display: none !important;
+  }
+  .contenedor-boton-modo-jur-ia-mobile {
+    display: flex !important;
+    margin-bottom: 10px;
+  }
+
+}
+
 
 .boton-modo-jur-ia {
     display: flex;
@@ -166,7 +194,7 @@
 .buscador-input {
     flex: 1;
     background: transparent;
-    padding: 1.45rem;
+    padding: 1.875rem;
     border: none;
     outline: none;
     font-size: var(--letra-lg);
@@ -174,7 +202,7 @@
 }
 
 .buscador-input::placeholder {
-    color: var(--colorNegro-escala-3);
+    color: var(--colorGris-escala-2);
     font-weight: lighter;
     font-style: italic;
     opacity: 1;
@@ -220,10 +248,21 @@
     transform: scale(1.25);
 }
 
-.titulo-conejos-busqueda {
+.titulo-consejos-busqueda {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.titulo-consejos-busqueda h2 {
+    margin: 0;
+    font-weight: bold;
+    font-size: var(--letra-3xl);
+}
+
+.titulo-consejos-busqueda-imagen img{
+    width: 30px;
+    height: 30px;
 }
 
 
@@ -256,6 +295,17 @@
 .panel-resultados-lista {
     display: flex;
     flex-direction: column;
+}
+
+.lista-consejos-busqueda {
+    color: var(--colorItemConsejoBusqueda);
+    padding-left: 30px;
+    margin: 0;
+    font-size: var(--letra-2xl);
+}
+
+.lista-consejos-busqueda  li::marker{
+    font-weight: lighter;
 }
 
 .panel-resultados-item {

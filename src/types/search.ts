@@ -79,20 +79,20 @@ export interface FilterYearsProps {
 }
 
 export interface FilterTextProps {
-  value?      : string;
-  onChange    : (value: string) => void;
-  clear       : () => void;
-  label       : string;
-  placeholder : string;
+  value?       : string;
+  onChange     : (value: string) => void;
+  clear        : () => void;
+  label        : string;
+  placeholder?  : string;
 }
 
 export interface FilterSelectProps {
-  value?      : string;
-  options     : AggBucket[];
-  onChange    : (value: string) => void;
-  clear       : () => void;
-  label       : string;
-  placeholder : string;
+  value?       : string;
+  options      : AggBucket[];
+  onChange     : (value: string) => void;
+  clear        : () => void;
+  label        : string;
+  placeholder? : string;
 }
 
 // Filtros fragmentados jerarquicamente 
@@ -140,10 +140,10 @@ export interface FragmentedFiltersProps {
 }
 
 export interface FilterNumberProps {
-  value?      : number;
-  onChange    : (value?: number) => void;
-  label       : string;
-  placeholder : string;
+  value?       : number;
+  onChange     : (value?: number) => void;
+  label        : string;
+  placeholder? : string;
 }
 
 export interface ResultsModalProps {

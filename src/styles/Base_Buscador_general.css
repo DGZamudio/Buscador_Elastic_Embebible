@@ -8,6 +8,7 @@ html {
     --container-lg: 32rem;
     --container-3xl: 48rem;
     --container-5xl: 64rem;
+    --container-4xl: 56rem;
     --container-7xl: 80rem;
 
     --letra-xs: 0.75rem;
@@ -66,6 +67,7 @@ body {
 html {
   --colorAzul: #00aeef;
   --colorAzul-claro: #2cb4e6;
+  --colorAzul-claro-escala2: #E1EDFF31;
   --colorAzul-oscuro: #0081b1;
   --colorAzul-oscuro-escala2: #1F96B2;
   --colorVino: #7a1f1f;
@@ -78,6 +80,7 @@ html {
   --colorGris-escala-2: #292524;
   --colorGris-escala-3: #46423d;
   --colorGris-escala-4: #9ca3af;
+  --colorGris-escala-5: #9B9B9B;
   --colorNegro: #000;
   --colorNegro-escala-2: #0f0f0f;
   --colorNegro-escala-3: #0B1526;
@@ -120,25 +123,30 @@ html {
   --colorBackgroundBotonModoIaHover: var(--colorAzul-oscuro-escala2);
   --colorBotonModoIaHover: var(--colorBlanco);
   --colorBotonActivoModoIa: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundTarjetaConsejosBusqueda: var(--colorAzul-claro-escala2);
+  --colorItemConsejoBusqueda: var(--colorGris-escala-5);
   /* -> BUSCADOR */
 
   /* FILTROS */
 
   --colorBordeFiltro: var(--colorNegro-escala-2);
+  --colorSombraFiltro: color-mix(in srgb, var(--colorAzul-oscuro-escala2) 20%, transparent);
   --colorBordeFiltroActivo: var(--colorAzul-oscuro-escala2);
 
   /* -> FILTROS */
 
   /* MODALES */
 
-  --colorBackgroundModales: var(--colorBlanco-escala-2);
+  --colorBackgroundModales: var(--colorBlanco);
+  --colorTituloModales: var(--colorAzul-oscuro-escala2);
   --colorBordesModales: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBotonModales: var(--colorAzul);
-  --colorBotonActivoModales: var(--colorAzul-claro);
+  --colorBotonModales: var(--colorAzul-oscuro-escala2);
+  --colorBotonActivoModales: var(--colorAzul-claro-escala2);
   --colorBotonSecundarioModales: var(--colorGris-escala-4);
   --colorBotonSecundarioActivoModales: var(--colorNegro-escala-2);
   --colorBotonPaginacion: var(--colorBlanco-escala-3);
   --colorBotonHoverPaginacion: var(--colorGris);
+  --colorBackgroundBotonCancelarModales: var(--colorBlanco-escala-2);
 
   /* -> MODALES */
 
