@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
-  --font-work-sans: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-montserrat: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
@@ -57,8 +57,8 @@ html {
     font-style: normal;
 }
 
-body {
-    font-family: var(--font-work-sans), system-ui, sans-serif;
+* {
+    font-family: var(--font-montserrat), system-ui, sans-serif !important;
 }
 
 
@@ -68,8 +68,11 @@ html {
   --colorAzul: #00aeef;
   --colorAzul-claro: #2cb4e6;
   --colorAzul-claro-escala2: #E1EDFF31;
+  --colorAzul-claro-escala3: #eaf6fd;
   --colorAzul-oscuro: #0081b1;
   --colorAzul-oscuro-escala2: #1F96B2;
+  --colorVerde: #3f858b;
+  --colorVerde-escala2: #ebf5f2;
   --colorVino: #7a1f1f;
   --colorVino-escala: #8c2a2a;
   --colorBlanco: #FFF;
@@ -108,6 +111,9 @@ html {
   --colorBordesBarraBusquedaActiva: var(--colorAzul-oscuro-escala2);
   --colorBackgroundBotonBusquedaActivo: var(--colorAzul-oscuro-escala2);
   --colorSimbolosActivosBarraBusqueda: var(--colorBlanco-escala-2);
+  --colorBackgroundEtiquetaTipo: var(--colorVerde-escala2);
+  --colorEtiquetaTipo: var(--colorVerde);
+  --colorIconosMetaResultado: var(--colorVerde);
   --colorBackgroundResultados: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
   --colorBordesResultados: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
   --colorResultadoHover: color-mix(in srgb, var(--colorGris) 20%, transparent);
@@ -152,19 +158,21 @@ html {
 
   /* FACETA */
 
-  --colorBackgroundFaceta: var(--colorBlanco-escala-2);
+  --colorBackgroundFaceta: var(--colorBlanco);
   --colorBackgroundFondoFaceta: color-mix(in srgb, var(--colorGris) 20%, transparent);
-  --colorBordesFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBordesFacetaInterno: color-mix(in srgb, var(--colorNegro-escala-2) 40%, transparent);
+  --colorBordesFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 10%, transparent);
+  --colorBordesFacetaInterno: color-mix(in srgb, var(--colorAzul-oscuro-escala2) 20%, transparent);
   --colorContadorFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 70%, transparent);
-  --colorBackgroundFacetaActiva: color-mix(in srgb, var(--colorNegro-escala-2) 10%, transparent);
+  --colorBackgroundContadorFaceta: color-mix(in srgb, var(--colorGris) 30%, transparent);
+  --colorBackgroundFacetaActiva: var(--colorAzul-claro-escala3);
 
   /* -> FACETA */
 
   /* TARJETA IA */
 
+  --colorTituloTarjetaIa: var(--colorAzul-oscuro);
   --colorBackgroundTarjetaIa: var(--colorBlanco-escala-4);
-  --colorTextoDisclaimerIa: var(--colorAzul-oscuro);
+  --colorTextoDisclaimerIa: color-mix(in srgb, var(--colorNegro-escala-2) 40%, transparent);
   --colorReferenciasIa: var(--colorAzul-oscuro);
 
   /* -> TARJETA IA */

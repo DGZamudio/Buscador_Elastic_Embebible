@@ -130,14 +130,21 @@
     border-bottom: 1px solid var(--colorBordesModales);
 }
 
+.contenedor-header-modal-resultados {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .modal-resultados-titulo {
-    font-size: var(--letra-2xl);
-    font-weight: 600;
+    font-size: var(--letra-3xl);
+    font-weight: bold;
 }
 
 @media (min-width: 640px) {
     .modal-resultados-titulo {
-        font-size: var(--letra-3xl);
+        font-size: var(--letra-4xl);
     }
 }
 

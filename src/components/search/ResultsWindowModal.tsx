@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { ResultsWindowModalProps } from "../../types/search";
 import AiMessageCard from "../ui/AiMessageCard";
 import SearchResultsContent from "./SearchResultsContent";
@@ -9,19 +8,13 @@ export default function ResultsWindowModal({
     loadingAiResponse,
     handleNextResults,
     disableVerMas,
-    hideVerMas
+    hideVerMas,
+    windowResponseMode,
+    setWindowResponseMode
 } : ResultsWindowModalProps) {
-    const [windowResponseMode, setWindowResponseMode] = useState<"ai" | "results">("ai");
+    
   return (
     <div className="contenedor-ventana-resultados">
-        <div className="contenedor-header-ventana-resultados">
-            <button className={`ventana-resultados-opcion ${windowResponseMode === "ai" ? "ventana-resultados-opcion-activa" : ""}`} onClick={() => setWindowResponseMode("ai")}>
-                JurIA
-            </button>
-            <button className={`ventana-resultados-opcion ${windowResponseMode === "results" ? "ventana-resultados-opcion-activa" : ""}`} onClick={() => setWindowResponseMode("results")}>
-                Resultados de búsqueda
-            </button>
-        </div>
         <div className="contenedor-contenido-ventana-resultados">
             {windowResponseMode === "ai" ? (
                 <>
@@ -33,7 +26,7 @@ export default function ResultsWindowModal({
                                     visible
                                 />
                                 <button className="contenedor-ver-mas-resultados" onClick={() => setWindowResponseMode("results")}>
-                                    Ver mas resultados de búsqueda...
+                                    Ver más documentos...
                                 </button>
                             </div>
                             <AiMessageCard
@@ -52,7 +45,7 @@ export default function ResultsWindowModal({
                     />
                     {!hideVerMas && (
                         <button disabled={disableVerMas} onClick={() => handleNextResults()} className="boton-ver-mas-resultados">
-                            Ver mas
+                            Ver más
                         </button>
                     )}
                 </div>

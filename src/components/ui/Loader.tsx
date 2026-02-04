@@ -20,7 +20,7 @@ export default function Loader({
                 )}
                 {variant === "filters" && (
                     <p>
-                        Cargando faceta...
+                        Cargando filtros avanzados...
                     </p>
                 )}
             </div>

@@ -1,3 +1,4 @@
+import { Building, CalendarDays } from "lucide-react";
 import type { SearchResultsProps } from "../../types/search";
 import NoResults from "../ui/NoResults";
 
@@ -28,6 +29,12 @@ export default function SearchResultsContent({
                             href={`https://gestornormativo.creg.gov.co/gestor/entorno/docs/${hit._source["doc-name"]}`}
                             target="_blank"
                         >
+                            <span className="contenedor-etiqueta-tipo">
+                                <p className="texto-etiqueta-tipo">
+                                    {hit._source.Tipo}
+                                </p>
+                            </span>
+
                             <p className="panel-resultados-titulo">
                                 {hit._source.title}
                             </p>
@@ -39,9 +46,24 @@ export default function SearchResultsContent({
                                 }}
                             />
 
-                            <p className="panel-resultados-meta">
-                                {hit._source.Entidad} · {hit._source.Year}
-                            </p>
+                            <div className="panel-resultados-meta">
+                                <div className="contenedor-resultados-meta-entidad">
+                                    <Building 
+                                        size={"1rem"}
+                                    />
+                                    <p className="texto-resultado-meta-entidad">
+                                        {hit._source.Entidad}
+                                    </p>
+                                </div>
+                                <div className="contenedor-resultados-meta-anio">
+                                    <CalendarDays 
+                                        size={"1rem"}
+                                    />
+                                    <p className="texto-resultado-meta-anio">
+                                        {hit._source.Year}
+                                    </p>
+                                </div>
+                            </div>
                         </a>
                     );
                 })}

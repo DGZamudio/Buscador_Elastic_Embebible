@@ -10,8 +10,12 @@ export default function AiMessageCard({
     const [openTarjeta, setOpenTarjeta] = useState<boolean>(false);
   return (
     <div className={`contenedor-tarjeta-mensaje-ia`}>
+        <h2 className="titulo-tarjeta-mensaje-ia">
+            Respuesta integrada con JurIA
+        </h2>
+
         <p className="disclaimer-tarjeta-mensaje-ia">
-            Las respuestas de Inteligencia Artificial - IA proporciona respuestas precisas, aunque no infalibles. la información es indicativa, verifica la respuesta y las referencias.
+            JurIA proporciona respuestas precisas, aunque no infalibles. La información es indicativa, verifica la respuesta y las referencias.
         </p>
 
         {loading ? (
@@ -36,7 +40,7 @@ export default function AiMessageCard({
         </div>
         {(!openTarjeta && !loading) && (
             <button className="boton-mostrar-mas-mensaje-ia" onClick={() => setOpenTarjeta(!openTarjeta)}>
-                Mostrar mas
+                Mostrar más
                 <MoveDown  size={"1em"}/>
             </button>
         )}

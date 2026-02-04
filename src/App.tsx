@@ -6,7 +6,7 @@ import FilterYears from "./components/search/FilterYears";
 import SearchBar from "./components/search/SearchBar";
 import SearchResultsPanel from "./components/search/SearchResultsPanel";
 import { useSearch } from "./hooks/useSearch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResultsModal from "./components/search/SearchResultsModal";
 import Loader from "./components/ui/Loader";
 import Typing from "./components/ui/isTyping"
@@ -41,6 +41,25 @@ export default function Buscador() {
 
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
   const [resultsOpen, setResultsOpen] = useState<boolean>(false)
+  const [windowResponseMode, setWindowResponseMode] = useState<"ai" | "results">("ai");
+
+  // Scroll when results open AND content has loaded
+  useEffect(() => {
+    if (!resultsOpen) return;
+
+    // Use a longer timeout to ensure the modal and all async content is rendered
+    const timer = setTimeout(() => {
+      const modalElement = document.querySelector('.modal-resultados-contenedor');
+      if (modalElement) {
+        modalElement.scrollIntoView({ 
+          behavior: "smooth", 
+          block: "start" 
+        });
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [resultsOpen, results.length]);
 
   return (
     <div className="contenedor-body">
@@ -86,23 +105,25 @@ export default function Buscador() {
 
                 <NoResults variant="sugerencia" visible={!isTyping && !loading && query.length > 0 && results.length == 0} />
 
-                <div className="contenedor-consejos-busqueda">
-                    <div className="contenedor-contenido-consejos-busqueda">
-                        <div className="titulo-consejos-busqueda">
-                            <div className="titulo-consejos-busqueda-imagen">
-                                <img src="/lightbulb.svg" alt="" />
+                {(!resultsOpen && !isTyping && !loading && query.length == 0) && (
+                    <div className="contenedor-consejos-busqueda">
+                        <div className="contenedor-contenido-consejos-busqueda">
+                            <div className="titulo-consejos-busqueda">
+                                <div className="titulo-consejos-busqueda-imagen">
+                                    <img src="/lightbulb.svg" alt="" />
+                                </div>
+                                <h2>
+                                    Consejos de búsqueda
+                                </h2>
                             </div>
-                            <h2>
-                                Consejos de búsqueda
-                            </h2>
+                            <ul className="lista-consejos-busqueda">
+                                <li>Usa palabras clave específicas para mejores resultados.</li>
+                                <li>Combina múltiples términos para afinar su búsqueda.</li>
+                                <li>Active el Modo JurIA para búsquedas jurídicas especializadas.</li>
+                            </ul>
                         </div>
-                        <ul className="lista-consejos-busqueda">
-                            <li>Usa palabras clave específicas para mejores resultados.</li>
-                            <li>Combina múltiples términos para afinar su búsqueda.</li>
-                            <li>Active el Modo JurIA para búsquedas jurídicas especializadas.</li>
-                        </ul>
                     </div>
-                </div>
+                )}
 
                 <div className="panel-resultados-flotante">
                     <SearchResultsPanel 
@@ -119,6 +140,8 @@ export default function Buscador() {
                         setSearchType("title")
                         setResultsOpen(false)
                     }}
+                    windowResponseMode={windowResponseMode}
+                    setWindowResponseMode={setWindowResponseMode}
                 >
                     <div className="contenedor-resultados-modal">
                         <div className="layout-resultados">
@@ -149,6 +172,8 @@ export default function Buscador() {
                                     loadingAiResponse={loadingAiResponse}
                                     handleNextResults={() => setLimit(prev => prev + 10)}
                                     disableVerMas={loading}
+                                    windowResponseMode={windowResponseMode}
+                                    setWindowResponseMode={setWindowResponseMode}
                                 />
                             </section>
                         </div>

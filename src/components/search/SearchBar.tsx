@@ -40,11 +40,13 @@ function SearchBar({
                     className="buscador-boton buscador-boton-limpiar"
                     type="button"
                     onClick={onCleanFilters}
+                    title="Limpiar Filtros"
                 >
                     <BrushCleaning size="1.2em"/>
                 </button>
             )}
             <button
+                title="Filtros Avanzados"
                 className={`buscador-boton buscador-boton-filtros ${
                 filterActive ? "buscador-boton-activo" : ""
             }`}
@@ -59,6 +61,7 @@ function SearchBar({
             <button
                 className="buscador-boton buscador-boton-buscar"
                 onClick={handleSubmit}
+                title="Buscar"
             >
                 <Search
                     className="buscador-icono-buscar"
