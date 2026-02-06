@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { fragmentFilters, getAiMessage, getSearchFilters, regularSearch, semanticSearch } from "../services/search.service";
-import type { aiResponseType, citationType, FragmentedFilters, initialFilters, SearchFilters, SearchHit, searchType } from "../types/search";
+import { fragmentFilters, getAiMessage, regularSearch, semanticSearch, getSearchFilters } from "../services/search.service";
+import type { aiResponseType, citationType, FragmentedFilters, SearchFilters, SearchHit, searchType, initialFilters } from "../types/search";
 
 export function useSearch() {
     const [query, setQuery] = useState<string>("");
@@ -8,7 +8,8 @@ export function useSearch() {
     const [aiResponse, setAiResponse] = useState<aiResponseType | undefined>(undefined);
     const [searchType, setSearchType] = useState<searchType>("title");
     const [page, setPage] = useState<number>(0);
-    const [pages, setPages] = useState<number>(0);
+    const [maxPages, setMaxPages] = useState<number>(0);
+    const [limit, setLimit] = useState<number>(10);
     const [filters, setFilters] = useState<SearchFilters>({});
     const [searchFiltersOptions, setSearchFiltersOptions] = useState<initialFilters | null>()
     const [selectedFacetaFilters, setSelectedFacetaFilters] = useState<SearchFilters>({});
@@ -66,16 +67,10 @@ export function useSearch() {
     }, [query, normalizedFilters, hasActiveFilters])
 
     useEffect(() => {
-        getSearchFilters()
-        .then((data) => {
-            setSearchFiltersOptions(data)
-        })
-        .catch(console.error)
-    }, []) // Solo se ejecuta una vez, trae las entidades y tipos para seleccionar asi mejorando la busqueda mediante estos filtros
-
-    useEffect(() => {
-        setPage(0);
-    }, [query, normalizedFilters]);
+        setLimit(10);
+        setPage(0)
+        setMaxPages(0)
+    }, [query, filters]);
 
     // Busqueda Regular
     useEffect(() => {
@@ -100,21 +95,25 @@ export function useSearch() {
         }
 
         const delay = setTimeout(async () => {
+            const scrollY = window.scrollY;
             setIsTyping(false)
             setLoading(true);
             try {
-                const data = await regularSearch(query, localFilters, localHasActiveFilters, page);
+                const data = await regularSearch(query, localFilters, localHasActiveFilters, page, limit);
                 setResults(data?.hits ?? []);
-                setPages(data.max_pages);
+                setMaxPages(data.max_pages);
             } catch (error) {
                 console.error(error);
             } finally {
                 setLoading(false);
+                requestAnimationFrame(() => {
+                    window.scrollTo({ top: scrollY });
+                });
             }
         }, 300); // debounce
 
         return () => clearTimeout(delay);
-    }, [query, page, normalizedFilters, hasActiveFilters]);
+    }, [page, query, limit, normalizedFilters, hasActiveFilters]);
 
     // Busqueda semantica
     useEffect(() => {
@@ -125,8 +124,10 @@ export function useSearch() {
 
         if (searchType !== "semantic") return
 
+        const scrollY = window.scrollY;
+
         setLoading(true)
-        if (page === 0) {
+        if (limit === 10) {
             memoizedUseGetFragmentedFilters()
             setLoadingAiResponse(true)
             getAiMessage(query)
@@ -138,14 +139,27 @@ export function useSearch() {
                 .finally(() => setLoadingAiResponse(false))
             })
         }
-        semanticSearch(query, normalizedFilters, hasActiveFilters, page)
+        semanticSearch(query, normalizedFilters, hasActiveFilters, page, limit)
         .then((data) => {
             setResults(data?.hits ?? [])
-            setPages(data?.max_pages)
+            setMaxPages(data.max_pages);
         })
         .catch(console.error)
-        .finally(() => setLoading(false))
-    }, [page, normalizedFilters, hasActiveFilters, searchType])
+        .finally(() => {
+            setLoading(false)
+            requestAnimationFrame(() => {
+                window.scrollTo({ top: scrollY });
+            });
+        })
+    }, [page, limit, normalizedFilters, hasActiveFilters, searchType])
+
+    useEffect(() => {
+        getSearchFilters()
+        .then((data) => {
+            setSearchFiltersOptions(data)
+        })
+        .catch(console.error)
+    }, []) // Solo se ejecuta una vez, trae las entidades y tipos para seleccionar asi mejorando la busqueda mediante estos filtros
 
     return {
         query,
@@ -158,15 +172,17 @@ export function useSearch() {
         hasActiveFilters,
         fragmentedFilters,
         loadingFragments,
-        pages,
         page,
         setPage,
+        maxPages,
+        limit,
+        setLimit,
         searchType,
         setSearchType,
         isTyping,
         aiResponse,
-        loadingAiResponse,
-        searchFiltersOptions
+        searchFiltersOptions,
+        loadingAiResponse
     };
 }
 

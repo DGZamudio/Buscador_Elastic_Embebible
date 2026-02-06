@@ -1,17 +1,16 @@
 "use client"
 import "../../styles/Componentes_Modales.css"
 import { useEffect } from "react"
-import { StepBack, StepForward } from "lucide-react"
 import type { ResultsModalProps } from "../../types/search"
+import { FileText, Sparkle } from "lucide-react"
 
 export default function ResultsModal({
   open,
   onClose,
   onRender,
   children,
-  page,
-  pages,
-  setPage
+  windowResponseMode,
+  setWindowResponseMode
 }: ResultsModalProps) {
     useEffect(() => {
         if (!open) return
@@ -35,25 +34,26 @@ export default function ResultsModal({
         <div className="modal-resultados-contenedor">
             <div className="modal-resultados-panel">
                 <div className="modal-resultados-header">
-                    <div>
+                    <div className="contenedor-header-modal-resultados">
                         <h2 className="modal-resultados-titulo">Esto encontramos:</h2>
-                        <p className="modal-resultados-subtitulo">
-                            Resultados mejorados usando búsqueda semántica
-                        </p>
+                        <div className="contenedor-header-ventana-resultados">
+                            <button className={`ventana-resultados-opcion ${windowResponseMode === "ai" ? "ventana-resultados-opcion-activa" : ""}`} onClick={() => setWindowResponseMode("ai")}>
+                                <Sparkle />
+                                JurIA
+                            </button>
+                            <button className={`ventana-resultados-opcion ${windowResponseMode === "results" ? "ventana-resultados-opcion-activa" : ""}`} onClick={() => setWindowResponseMode("results")}>
+                                <FileText />
+                                Listado de documentos
+                            </button>
+                        </div>
                     </div>
-                    {/* <button
-                        onClick={onClose}
-                        className="modal-resultados-boton-cerrar"
-                    >
-                        <X size="1.2em" />
-                    </button> */}
                 </div>
 
                 <div className="modal-resultados-contenido">
                     {children}
                 </div>
 
-                <div className="modal-resultados-footer">
+                {/* <div className="modal-resultados-footer">
                     <button onClick={() => setPage(-1)} disabled={page == 0} className="modal-resultados-boton-paginacion">
                         <StepBack 
                             size={"1em"}
@@ -69,7 +69,7 @@ export default function ResultsModal({
                             size={"1em"}
                         />
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     )

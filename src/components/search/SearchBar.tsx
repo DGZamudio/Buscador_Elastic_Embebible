@@ -1,7 +1,7 @@
 "use client"
 
 import type { SearchBarProps } from "../../types/search";
-import { Brain, BrushCleaning, Funnel, FunnelPlus, Search } from "lucide-react";
+import { BrushCleaning, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 
 function SearchBar({
     value,
@@ -10,7 +10,7 @@ function SearchBar({
     onOpenFilters,
     onCleanFilters,
     filterActive,
-    placeholder = "Buscar en Creg...",
+    placeholder = "Escribe tu duda jurídica aquí...",
     visibleJurIaButton 
 }: SearchBarProps) {
     const handleSubmit = () => {
@@ -40,39 +40,43 @@ function SearchBar({
                     className="buscador-boton buscador-boton-limpiar"
                     type="button"
                     onClick={onCleanFilters}
+                    title="Limpiar Filtros"
                 >
                     <BrushCleaning size="1.2em"/>
                 </button>
             )}
             <button
+                title="Filtros Avanzados"
                 className={`buscador-boton buscador-boton-filtros ${
                 filterActive ? "buscador-boton-activo" : ""
             }`}
                 type="button"
                 onClick={onOpenFilters}
             >
-                {filterActive ? (
-                    <FunnelPlus size="1.2em"/>
-                ) : (
-                    <Funnel size="1.2em"/>
-                )}
+                <SlidersHorizontal 
+                    className="buscador-icono-filtros"
+                    size="1.2em"
+                />
             </button>
             <button
                 className="buscador-boton buscador-boton-buscar"
                 onClick={handleSubmit}
+                title="Buscar"
             >
                 <Search
                     className="buscador-icono-buscar"
                     size="1.2rem"
                 />
             </button>
+            {visibleJurIaButton && (
+                <div className="contenedor-boton-modo-jur-ia">
+                    <a className="boton-modo-jur-ia" href="https://www.juria.co" target="_blank">
+                        <Sparkles />
+                        Modo JurIA
+                    </a>
+                </div>
+            )}
         </div>
-        {visibleJurIaButton && (
-            <a className="boton-modo-jur-ia" href="https://www.juria.co" target="_blank">
-                <Brain />
-                Modo JurIA
-            </a>
-        )}
     </form>
   )
 }

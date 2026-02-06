@@ -6,16 +6,16 @@ import FilterYears from "./components/search/FilterYears";
 import SearchBar from "./components/search/SearchBar";
 import SearchResultsPanel from "./components/search/SearchResultsPanel";
 import { useSearch } from "./hooks/useSearch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResultsModal from "./components/search/SearchResultsModal";
-import SearchResultsContent from "./components/search/SearchResultsContent";
 import Loader from "./components/ui/Loader";
 import Typing from "./components/ui/isTyping"
 import NoResults from "./components/ui/NoResults";
 import FilterNumber from "./components/search/FilterNumber";
 import FragmentedFilters from "./components/search/FragmentedFiltersPanel";
-import AiMessageCard from "./components/ui/AiMessageCard";
+import ResultsWindowModal from "./components/search/ResultsWindowModal";
 import FilterSelect from "./components/search/FilterSelect";
+import { Sparkles } from "lucide-react";
 
 export default function Buscador() {
   const {
@@ -28,19 +28,38 @@ export default function Buscador() {
     hasActiveFilters,
     fragmentedFilters,
     loadingFragments,
-    page,
-    pages,
-    setPage,
     setSearchType,
     setSelectedFacetaFilters,
     isTyping,
     aiResponse,
     loadingAiResponse,
+    limit,
+    setLimit,
+    maxPages,
     searchFiltersOptions
   } = useSearch();
 
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
   const [resultsOpen, setResultsOpen] = useState<boolean>(false)
+  const [windowResponseMode, setWindowResponseMode] = useState<"ai" | "results">("ai");
+
+  // Scroll when results open AND content has loaded
+  useEffect(() => {
+    if (!resultsOpen) return;
+
+    // Use a longer timeout to ensure the modal and all async content is rendered
+    const timer = setTimeout(() => {
+      const modalElement = document.querySelector('.modal-resultados-contenedor');
+      if (modalElement) {
+        modalElement.scrollIntoView({ 
+          behavior: "smooth", 
+          block: "start" 
+        });
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [resultsOpen, results.length]);
 
   return (
     <div className="contenedor-body">
@@ -50,7 +69,7 @@ export default function Buscador() {
                     Búsqueda
                 </h1>
                 <p className='descripcion-buscador'>
-                    Puede buscar por palabras dentro del documento, por frases, por palabras clave y por los datos que identifican un documento, puede prefijar los resultados para un tipo de documento antes de realizar la búsqueda, o puede filtrar los resultados por diferentes opciones.
+                    Busca registros por palabras clave o datos del documento
                 </p>
             </div>
 
@@ -73,11 +92,38 @@ export default function Buscador() {
                     visibleJurIaButton={!resultsOpen}
                 />
 
+                <div className="contenedor-boton-modo-jur-ia contenedor-boton-modo-jur-ia-mobile">
+                    <a className="boton-modo-jur-ia" href="https://www.juria.co" target="_blank">
+                        <Sparkles />
+                        Modo JurIA
+                    </a>
+                </div>
+
                 <Typing visible={isTyping && !resultsOpen} />
 
                 <Loader visible={!isTyping && loading}/>
 
                 <NoResults variant="sugerencia" visible={!isTyping && !loading && query.length > 0 && results.length == 0} />
+
+                {(!resultsOpen && !isTyping && !loading && query.length == 0) && (
+                    <div className="contenedor-consejos-busqueda">
+                        <div className="contenedor-contenido-consejos-busqueda">
+                            <div className="titulo-consejos-busqueda">
+                                <div className="titulo-consejos-busqueda-imagen">
+                                    <img src="/lightbulb.svg" alt="" />
+                                </div>
+                                <h2>
+                                    Consejos de búsqueda
+                                </h2>
+                            </div>
+                            <ul className="lista-consejos-busqueda">
+                                <li>Usa palabras clave específicas para mejores resultados.</li>
+                                <li>Combina múltiples términos para afinar su búsqueda.</li>
+                                <li>Active el Modo JurIA para búsquedas jurídicas especializadas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                )}
 
                 <div className="panel-resultados-flotante">
                     <SearchResultsPanel 
@@ -94,16 +140,8 @@ export default function Buscador() {
                         setSearchType("title")
                         setResultsOpen(false)
                     }}
-                    page={page}
-                    pages={pages}
-                    setPage={(delta) => 
-                        setPage(prev => {
-                            const next = (prev ?? 0) + delta;
-                            if (next < 0) return 0;
-                            if (next >= (pages ?? 0)) return (pages ?? 0) - 1;
-                            return next;
-                        })
-                    }
+                    windowResponseMode={windowResponseMode}
+                    setWindowResponseMode={setWindowResponseMode}
                 >
                     <div className="contenedor-resultados-modal">
                         <div className="layout-resultados">
@@ -127,16 +165,15 @@ export default function Buscador() {
                             </aside>
                             
                             <section className="contenido-resultados">
-                                {(aiResponse || loadingAiResponse) && (
-                                    <AiMessageCard
-                                        message={aiResponse?.message}
-                                        citations={aiResponse?.citations}
-                                        loading={loadingAiResponse}
-                                    />
-                                )}
-                                <SearchResultsContent 
+                                <ResultsWindowModal 
+                                    aiResponse={aiResponse ?? null}
                                     results={results}
-                                    visible
+                                    hideVerMas={limit >= maxPages}
+                                    loadingAiResponse={loadingAiResponse}
+                                    handleNextResults={() => setLimit(prev => prev + 10)}
+                                    disableVerMas={loading}
+                                    windowResponseMode={windowResponseMode}
+                                    setWindowResponseMode={setWindowResponseMode}
                                 />
                             </section>
                         </div>
@@ -170,7 +207,7 @@ export default function Buscador() {
                             ...prev,
                             title: undefined
                         }))}
-                        label="Debe contener esto en el titulo:"
+                        label="Debe contener esto en el título:"
                         placeholder="Ej: Resolución del 2008"
                     />
                     <FilterText
@@ -184,7 +221,7 @@ export default function Buscador() {
                             phrase: undefined
                         }))}
                         label="Debe contener esta frase:"
-                        placeholder="Ingrese la frase"
+                        placeholder="Ingrese la frase..."
                     />
                     <FilterText
                         value={filters.not_include?.join(" ") ?? ""}
@@ -196,7 +233,7 @@ export default function Buscador() {
                             ...prev,
                             not_include: undefined
                         }))}
-                        label="NO debe contener estas palabras:"
+                        label="NO Debe contener estas palabras:"
                         placeholder="Separa las palabras con espacios"
                     />
                     <FilterText
@@ -237,8 +274,7 @@ export default function Buscador() {
                                 ...prev,
                                 document_type: undefined
                             }))}
-                            label="Define el tipo de documento:"
-                            placeholder="Ej: Leyes"
+                            label="Define el tipo de documento"
                         />
                         <FilterSelect 
                             value={filters?.entity}
@@ -251,8 +287,7 @@ export default function Buscador() {
                                 ...prev,
                                 entity: undefined
                             }))}
-                            label="Escribe la entidad que remite el documento:"
-                            placeholder="Ej: Procuraduría General de la Nación"
+                            label="Entidad que remite el documento"
                         />
                     </div>
                     <div className="fila-filtros">
@@ -272,8 +307,7 @@ export default function Buscador() {
                                     query: undefined
                                 }
                             }))}
-                            label="Estas palabras deben estan cerca:"
-                            placeholder="Ej: Ley resolución consejo"
+                            label="Estas palabras deben estan cerca"
                         />
                         <FilterNumber 
                             value={filters.proximity?.distance}
@@ -284,8 +318,7 @@ export default function Buscador() {
                                     distance: numero
                                 }
                             }))}
-                            label="Distancia entre las palabras cercanas:"
-                            placeholder="Por defecto 8"
+                            label="Distancia entre las palabras"
                         />
                     </div>
                     <FilterYears

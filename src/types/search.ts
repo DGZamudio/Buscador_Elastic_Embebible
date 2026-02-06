@@ -79,20 +79,20 @@ export interface FilterYearsProps {
 }
 
 export interface FilterTextProps {
-  value?      : string;
-  onChange    : (value: string) => void;
-  clear       : () => void;
-  label       : string;
-  placeholder : string;
+  value?       : string;
+  onChange     : (value: string) => void;
+  clear        : () => void;
+  label        : string;
+  placeholder?  : string;
 }
 
 export interface FilterSelectProps {
-  value?      : string;
-  options     : AggBucket[];
-  onChange    : (value: string) => void;
-  clear       : () => void;
-  label       : string;
-  placeholder : string;
+  value?       : string;
+  options      : AggBucket[];
+  onChange     : (value: string) => void;
+  clear        : () => void;
+  label        : string;
+  placeholder? : string;
 }
 
 // Filtros fragmentados jerarquicamente 
@@ -140,20 +140,19 @@ export interface FragmentedFiltersProps {
 }
 
 export interface FilterNumberProps {
-  value?      : number;
-  onChange    : (value?: number) => void;
-  label       : string;
-  placeholder : string;
+    value?       : number;
+    onChange     : (value?: number) => void;
+    label        : string;
+    placeholder? : string;
 }
 
 export interface ResultsModalProps {
-  open     : boolean;
-  onClose  : () => void;
-  onRender : () => void;
-  children   : React.ReactNode;
-  page       : number;
-  pages      : number;
-  setPage    : (numero: number) => void;
+    open     : boolean;
+    onClose  : () => void;
+    onRender : () => void;
+    children   : React.ReactNode;
+    windowResponseMode : "ai" | "results";
+    setWindowResponseMode : (mode: "ai" | "results") => void;
 }
 
 export interface LoaderProps {
@@ -192,4 +191,15 @@ export interface AiMessageCardProps {
     message?   : string;
     citations? : citationType[];
     loading    : boolean;
+}
+
+export interface ResultsWindowModalProps {
+    aiResponse        : aiResponseType | null;
+    results           : SearchHit[];
+    loadingAiResponse : boolean;
+    handleNextResults : () => void;
+    disableVerMas     : boolean;
+    hideVerMas        : boolean;
+    windowResponseMode : "ai" | "results";
+    setWindowResponseMode : (mode: "ai" | "results") => void;
 }

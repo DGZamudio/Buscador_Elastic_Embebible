@@ -1,20 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
-  --font-work-sans: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-montserrat: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
     --container-lg: 32rem;
     --container-3xl: 48rem;
     --container-5xl: 64rem;
+    --container-4xl: 56rem;
     --container-7xl: 80rem;
 
     --letra-xs: 0.75rem;
     --letra-sm: 0.875rem;
+    --letra-md: 1rem;
     --letra-lg: 1.125rem;
     --letra-2xl: 1.5rem;
     --letra-3xl: 1.875rem;
+    --letra-4xl: 2.45rem;
     --letra-5xl: 3rem;
 
     --reestablecerLetra: 1;
@@ -54,8 +57,8 @@ html {
     font-style: normal;
 }
 
-body {
-    font-family: var(--font-work-sans), system-ui, sans-serif;
+* {
+    font-family: var(--font-montserrat), system-ui, sans-serif !important;
 }
 
 
@@ -64,7 +67,12 @@ body {
 html {
   --colorAzul: #00aeef;
   --colorAzul-claro: #2cb4e6;
+  --colorAzul-claro-escala2: #E1EDFF31;
+  --colorAzul-claro-escala3: #eaf6fd;
   --colorAzul-oscuro: #0081b1;
+  --colorAzul-oscuro-escala2: #1F96B2;
+  --colorVerde: #3f858b;
+  --colorVerde-escala2: #ebf5f2;
   --colorVino: #7a1f1f;
   --colorVino-escala: #8c2a2a;
   --colorBlanco: #FFF;
@@ -75,8 +83,10 @@ html {
   --colorGris-escala-2: #292524;
   --colorGris-escala-3: #46423d;
   --colorGris-escala-4: #9ca3af;
+  --colorGris-escala-5: #9B9B9B;
   --colorNegro: #000;
   --colorNegro-escala-2: #0f0f0f;
+  --colorNegro-escala-3: #0B1526;
 
   /* VARIABLES ESTATICAS */
   /* -> VARIABLES ESTATICAS */
@@ -85,71 +95,84 @@ html {
 :root {
   /* GENERAL PARA TODAS LAS PAGS */
   
-  --colorBackgroundGeneral: var(--colorBlanco-escala-2);
+  --colorBackgroundGeneral: var(--colorBlanco);
   --colorForegroundGeneral: var(--colorNegro-escala-2);
 
   /* -> GENERAL PARA TODAS LAS PAGS */
 
   /* BUSCADOR */
 
-  --colorTituloBuscador: var(--colorAzul);
+  --colorTituloBuscador: var(--colorAzul-oscuro-escala2);
   --colorAvisoInformativo: var(--colorGris-escala-3);
-  --colorFuncionesBarraBusqueda: var(--colorAzul);
-  --colorBackgroundBarraBusqueda: color-mix(in srgb, var(--colorBlanco-escala-2) 40%, transparent);
+  --colorFuncionesBarraBusqueda: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundBarraBusqueda: var(--colorBlanco);
+  --colorSombraBarraBusqueda: color-mix(in srgb, var(--colorAzul-oscuro-escala2) 20%, transparent);
   --colorBordesBarraBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBordesBarraBusquedaActiva: var(--colorAzul);
-  --colorBackgroundBotonBusquedaActivo: var(--colorAzul-claro);
+  --colorBordesBarraBusquedaActiva: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundBotonBusquedaActivo: var(--colorAzul-oscuro-escala2);
   --colorSimbolosActivosBarraBusqueda: var(--colorBlanco-escala-2);
+  --colorBackgroundEtiquetaTipo: var(--colorVerde-escala2);
+  --colorEtiquetaTipo: var(--colorVerde);
+  --colorIconosMetaResultado: var(--colorVerde);
   --colorBackgroundResultados: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
   --colorBordesResultados: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
   --colorResultadoHover: color-mix(in srgb, var(--colorGris) 20%, transparent);
+  --colorOpcionVentanaResultadoHover: var(--colorAzul-oscuro);
   --colorTituloResultado: var(--colorAzul-oscuro);
   --colorCaracteristicasResultado: var(--colorNegro);
   --colorContenidoResultado: var(--colorGris-escala-3);
   --colorBackgroundSugerenciasBusqueda: color-mix(in srgb, var(--colorBlanco-escala-2) 70%, transparent);
   --colorBordeSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
   --colorHoverSugerenciasBusqueda: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBotonModoIa: var(--colorAzul);
-  --colorBackgroundBotonModoIaHover: var(--colorAzul);
+  --colorBotonModoIa: var(--colorBlanco);
+  --colorBackgroundBotonModoIa: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundBotonModoIaHover: var(--colorAzul-oscuro-escala2);
   --colorBotonModoIaHover: var(--colorBlanco);
-  --colorBotonActivoModoIa: var(--colorAzul-claro);
+  --colorBotonActivoModoIa: var(--colorAzul-oscuro-escala2);
+  --colorBackgroundTarjetaConsejosBusqueda: var(--colorAzul-claro-escala2);
+  --colorItemConsejoBusqueda: var(--colorGris-escala-5);
   /* -> BUSCADOR */
 
   /* FILTROS */
 
   --colorBordeFiltro: var(--colorNegro-escala-2);
-  --colorBordeFiltroActivo: var(--colorAzul);
+  --colorSombraFiltro: color-mix(in srgb, var(--colorAzul-oscuro-escala2) 20%, transparent);
+  --colorBordeFiltroActivo: var(--colorAzul-oscuro-escala2);
 
   /* -> FILTROS */
 
   /* MODALES */
 
-  --colorBackgroundModales: var(--colorBlanco-escala-2);
+  --colorBackgroundModales: var(--colorBlanco);
+  --colorTituloModales: var(--colorAzul-oscuro-escala2);
   --colorBordesModales: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBotonModales: var(--colorAzul);
-  --colorBotonActivoModales: var(--colorAzul-claro);
+  --colorBotonModales: var(--colorAzul-oscuro-escala2);
+  --colorBotonActivoModales: var(--colorAzul-claro-escala2);
   --colorBotonSecundarioModales: var(--colorGris-escala-4);
   --colorBotonSecundarioActivoModales: var(--colorNegro-escala-2);
   --colorBotonPaginacion: var(--colorBlanco-escala-3);
   --colorBotonHoverPaginacion: var(--colorGris);
+  --colorBackgroundBotonCancelarModales: var(--colorBlanco-escala-2);
 
   /* -> MODALES */
 
   /* FACETA */
 
-  --colorBackgroundFaceta: var(--colorBlanco-escala-2);
+  --colorBackgroundFaceta: var(--colorBlanco);
   --colorBackgroundFondoFaceta: color-mix(in srgb, var(--colorGris) 20%, transparent);
-  --colorBordesFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 20%, transparent);
-  --colorBordesFacetaInterno: color-mix(in srgb, var(--colorNegro-escala-2) 40%, transparent);
+  --colorBordesFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 10%, transparent);
+  --colorBordesFacetaInterno: color-mix(in srgb, var(--colorAzul-oscuro-escala2) 20%, transparent);
   --colorContadorFaceta: color-mix(in srgb, var(--colorNegro-escala-2) 70%, transparent);
-  --colorBackgroundFacetaActiva: color-mix(in srgb, var(--colorNegro-escala-2) 10%, transparent);
+  --colorBackgroundContadorFaceta: color-mix(in srgb, var(--colorGris) 30%, transparent);
+  --colorBackgroundFacetaActiva: var(--colorAzul-claro-escala3);
 
   /* -> FACETA */
 
   /* TARJETA IA */
 
+  --colorTituloTarjetaIa: var(--colorAzul-oscuro);
   --colorBackgroundTarjetaIa: var(--colorBlanco-escala-4);
-  --colorTextoDisclaimerIa: var(--colorAzul-oscuro);
+  --colorTextoDisclaimerIa: color-mix(in srgb, var(--colorNegro-escala-2) 40%, transparent);
   --colorReferenciasIa: var(--colorAzul-oscuro);
 
   /* -> TARJETA IA */

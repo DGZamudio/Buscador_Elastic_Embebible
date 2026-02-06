@@ -19,7 +19,7 @@ function FilterText({
                 <input 
                     value={value ?? ""}
                     onChange={(e) => onChange(e.target.value)}
-                    placeholder={placeholder}
+                    placeholder={placeholder ?? ""}
                     className="campo-input-filtro"
                     type="text"
                 />

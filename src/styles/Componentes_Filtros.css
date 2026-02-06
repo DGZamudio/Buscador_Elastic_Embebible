@@ -3,30 +3,39 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    align-items: center;
     justify-content: space-evenly;
 }
 
 .etiqueta-campo-filtro {
-    font-size: 14px;
+    font-size: var(--letra-lg);
     font-weight: 500;
-    text-align: center;
+    text-align: left;
 }
 
-.contenedor-input-casilla-numero-filtro {
+.contenedor-input-casilla-numero-filtro, .contenedor-input-casilla-select-filtro, .contenedor-input-casilla-rango-filtro {
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
 
-    border: 1px solid color-mix(in srgb, var(--colorBordeFiltro) 10%, transparent);
+    box-shadow: 1px 2px 6px var(--colorSombraFiltro);
     border-radius: 4px;
 
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.contenedor-input-casilla-numero-filtro:focus-within {
+.campo-input-filtro::placeholder{
+    color: var(--colorGris-escala-2);
+    font-weight: lighter;
+    font-style: italic;
+    opacity: 1;
+}
+
+.contenedor-input-casilla-numero-filtro:focus-within, .contenedor-input-casilla-select-filtro:focus-within, .contenedor-input-casilla-rango-filtro:focus-within {
     border-color: var(--colorBordeFiltroActivo);
     box-shadow: 0 0 0 1px var(--colorBordeFiltroActivo);
+}
+
+.contenedor-input-casilla-select-filtro {
+    display: flex;
+    align-items: center;
 }
 
 .input-casilla-numero-filtro {
@@ -41,22 +50,24 @@
 }
 
 .campo-input-filtro {
+    margin-left: 15px;
     width: 70%;
 }
 
 .campo-select-filtro {
     width: 25%;
     cursor: pointer;
+    appearance: none;
 }
 
 
 .campo-input-filtro,
 .campo-select-filtro {
-    padding: 8px;
+    padding: 12px;
     border: none;
     outline: none;
     background: transparent;
-    font-size: 0.875rem;
+    font-size: 1rem;
 }
 
 
@@ -87,12 +98,23 @@
     opacity: 0.7;
 }
 
-.rango-anios-filtro {
+.contenedor-input-casilla-rango-filtro {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding-left: 15px;
+}
+
+.rango-anios-filtro {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
     margin-top: 12px;
+}
+
+.contenedor-filtro-rango-anios {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .separador-rango-anios {
@@ -101,14 +123,13 @@
 }
 
 .campo-input-rango {
-    width: 33%;
     display: flex;
     justify-content: space-evenly;
 
-    border: 1px solid color-mix(in srgb, var(--colorBordeFiltro) 10%, transparent);
     border-radius: 4px;
 
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    margin: 0 !important;
 }
 
 .campo-input-rango:focus {

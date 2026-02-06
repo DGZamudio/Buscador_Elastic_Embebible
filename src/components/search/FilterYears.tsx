@@ -1,3 +1,4 @@
+import { CalendarDays } from "lucide-react"
 import "../../styles/Componentes_Filtros.css"
 import type { FilterYearsProps } from "../../types/search"
 
@@ -10,25 +11,38 @@ function FilterYears({
     return (
         <div className="rango-anios-filtro">
             <label className="etiqueta-campo-filtro">
-                Rango de años:
+                Rango de años
             </label>
-            <input 
-                value={yearFrom ?? ""}
-                onChange={(e) => onChangeyearFrom(e.target.value === "" ? undefined : e.target.value)}
-                placeholder="Año inicial"
-                className="campo-input-filtro campo-input-rango"
-                type="number"
-            />
+            <div className="contenedor-filtro-rango-anios">
+                <div className="contenedor-input-casilla-rango-filtro">
+                    <CalendarDays 
+                        color="var(--colorAzul-oscuro-escala2)"
+                    />
+                    <input 
+                        value={yearFrom ?? ""}
+                        onChange={(e) => onChangeyearFrom(e.target.value === "" ? undefined : e.target.value)}
+                        placeholder="Año inicial"
+                        className="campo-input-filtro campo-input-rango"
+                        type="number"
+                    />
+                </div>
 
-            <span className="separador-rango-anios">-</span>
 
-            <input 
-                value={yearTo ?? ""}
-                onChange={(e) => onChangeyearTo(e.target.value === "" ? undefined : e.target.value)}
-                placeholder="Año final"
-                className="campo-input-filtro campo-input-rango"
-                type="number"
-            />
+                <span className="separador-rango-anios">-</span>
+
+                <div className="contenedor-input-casilla-rango-filtro">
+                    <CalendarDays 
+                        color="var(--colorAzul-oscuro-escala2)"
+                    />
+                    <input 
+                        value={yearTo ?? ""}
+                        onChange={(e) => onChangeyearTo(e.target.value === "" ? undefined : e.target.value)}
+                        placeholder="Año final"
+                        className="campo-input-filtro campo-input-rango"
+                        type="number"
+                    />
+                </div>
+            </div>
         </div>
     )
 }

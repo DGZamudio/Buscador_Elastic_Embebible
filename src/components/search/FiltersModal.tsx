@@ -34,19 +34,18 @@ export default function FiltersModal({
         <div className="filtros-modal-contenedor">
             <div className="filtros-modal-caja">
                 <div className="filtros-modal-encabezado">
-                    <h2 className="filtros-modal-titulo">
-                        Filtros avanzados
-                    </h2>
-
                     <button
                         onClick={onClose}
                         className="filtros-modal-boton-cerrar"
                     >
-                        <X size="1.2em" />
+                        <X size="3em" />
                     </button>
                 </div>
 
                 <div className="filtros-modal-contenido">
+                    <h2 className="filtros-modal-titulo">
+                        Filtros de búsqueda avanzada
+                    </h2>
                     {children}
                 </div>
 
@@ -62,7 +61,7 @@ export default function FiltersModal({
                         onClick={onSave}
                         className="filtros-modal-boton-aplicar"
                     >
-                        Aplicar
+                        Buscar
                     </button>
                 </div>
             </div>
