@@ -14,7 +14,6 @@
 
 .filtros-modal-contenedor {
     position: relative;
-    margin: 8rem auto 0 auto;
     width: 100%;
     max-width: var(--container-4xl);
 }
@@ -145,6 +144,10 @@
 @media (min-width: 640px) {
     .modal-resultados-titulo {
         font-size: var(--letra-4xl);
+    }
+
+    .filtros-modal-contenedor {
+        margin: 8rem auto 0 auto;
     }
 }
 

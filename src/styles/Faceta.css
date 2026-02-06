@@ -43,6 +43,11 @@
     color: var(--colorNegro-escala-2);
 }
 
+.faceta-open {
+    background-color: var(--colorBackgroundFacetaActiva) !important;
+    border-radius: 10px;
+}
+
 .filtros-facetados-tipo-nombre {
     font-weight: 600;
 }
