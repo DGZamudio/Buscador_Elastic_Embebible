@@ -10,7 +10,7 @@
 }
 
 .filtros-facetados-header {
-    padding: 1.2rem 1rem 0px;
+    padding: 1.2rem 1rem;
 }
 
 .filtros-facetados-toggle {
@@ -124,7 +124,7 @@
     transform: translateY(-6px);
     transition: opacity 0.2s ease, transform 0.2s ease;
     gap:12px;
-    padding: 15px 0px;
+    padding-bottom:15px;
 }
 
 .filtros-facetados-body-wrapper.open .filtros-facetados-body {

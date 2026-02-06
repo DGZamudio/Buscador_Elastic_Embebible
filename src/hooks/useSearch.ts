@@ -95,7 +95,6 @@ export function useSearch() {
         }
 
         const delay = setTimeout(async () => {
-            const scrollY = window.scrollY;
             setIsTyping(false)
             setLoading(true);
             try {
@@ -106,9 +105,6 @@ export function useSearch() {
                 console.error(error);
             } finally {
                 setLoading(false);
-                requestAnimationFrame(() => {
-                    window.scrollTo({ top: scrollY });
-                });
             }
         }, 300); // debounce
 
@@ -124,7 +120,6 @@ export function useSearch() {
 
         if (searchType !== "semantic") return
 
-        const scrollY = window.scrollY;
 
         setLoading(true)
         if (limit === 10) {
@@ -147,9 +142,6 @@ export function useSearch() {
         .catch(console.error)
         .finally(() => {
             setLoading(false)
-            requestAnimationFrame(() => {
-                window.scrollTo({ top: scrollY });
-            });
         })
     }, [page, limit, normalizedFilters, hasActiveFilters, searchType])
 

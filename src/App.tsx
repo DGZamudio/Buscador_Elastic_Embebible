@@ -6,7 +6,7 @@ import FilterYears from "./components/search/FilterYears";
 import SearchBar from "./components/search/SearchBar";
 import SearchResultsPanel from "./components/search/SearchResultsPanel";
 import { useSearch } from "./hooks/useSearch";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ResultsModal from "./components/search/SearchResultsModal";
 import Loader from "./components/ui/Loader";
 import Typing from "./components/ui/isTyping"
@@ -42,24 +42,29 @@ export default function Buscador() {
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
   const [resultsOpen, setResultsOpen] = useState<boolean>(false)
   const [windowResponseMode, setWindowResponseMode] = useState<"ai" | "results">("ai");
-
+  const availableAutoScroll = useRef(true);
+  
   // Scroll when results open AND content has loaded
   useEffect(() => {
-    if (!resultsOpen) return;
+    if (!resultsOpen) {
+        availableAutoScroll.current = true;
+        return;
+    }
 
     // Use a longer timeout to ensure the modal and all async content is rendered
     const timer = setTimeout(() => {
       const modalElement = document.querySelector('.modal-resultados-contenedor');
-      if (modalElement) {
+      if (modalElement && availableAutoScroll.current) {
         modalElement.scrollIntoView({ 
           behavior: "smooth", 
           block: "start" 
         });
       }
+      availableAutoScroll.current = false;
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [resultsOpen, results.length]);
+  }, [resultsOpen, results]);
 
   return (
     <div className="contenedor-body">
@@ -124,13 +129,15 @@ export default function Buscador() {
                         </div>
                     </div>
                 )}
-
-                <div className="panel-resultados-flotante">
-                    <SearchResultsPanel 
-                        results={results}
-                        visible={!resultsOpen && results.length > 0 && query.length > 0}
-                    />
-                </div>
+                
+                {!resultsOpen && results.length > 0 && query.length > 0 && (
+                    <div className="panel-resultados-flotante">
+                        <SearchResultsPanel 
+                            results={results}
+                            visible={!resultsOpen && results.length > 0 && query.length > 0}
+                        />
+                    </div>
+                )}
 
                 <ResultsModal
                     open={resultsOpen}
@@ -149,6 +156,7 @@ export default function Buscador() {
                                 <FragmentedFilters 
                                     fragments={fragmentedFilters}
                                     onFilter={(facetaSelectedFilters) => {
+                                        availableAutoScroll.current=true
                                         setSearchType("regular")
                                         setSelectedFacetaFilters({
                                             ...facetaSelectedFilters

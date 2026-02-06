@@ -267,7 +267,6 @@
 
 /* Resultados */
 .panel-resultados {
-    margin-top: 0.75rem;
     width: 100%;
     backdrop-filter: blur(16px);
     display: flex;
@@ -541,8 +540,6 @@
 
 .contenedor-ventana-resultados {
     margin-top: 0.75rem;
-    overflow: hidden;
-    padding: 1rem;
     overscroll-behavior: contain;
 }
 
@@ -620,3 +617,7 @@
 }
 
 /* -> VENTANA RESULTADOS */
+
+.contenedor-etiqueta-tipo, .contenedor-resultados-meta-entidad, .contenedor-resultados-meta-anio {
+    display: none !important;
+}
