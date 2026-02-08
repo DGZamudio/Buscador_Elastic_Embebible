@@ -71,6 +71,7 @@ html {
   --colorAzul-claro-escala3: #eaf6fd;
   --colorAzul-oscuro: #0081b1;
   --colorAzul-oscuro-escala2: #1F96B2;
+  --colorAzul-oscuro-escala3: #101f38;
   --colorVerde: #3f858b;
   --colorVerde-escala2: #ebf5f2;
   --colorVino: #7a1f1f;
@@ -173,7 +174,8 @@ html {
   --colorTituloTarjetaIa: var(--colorAzul-oscuro);
   --colorBackgroundTarjetaIa: var(--colorBlanco-escala-4);
   --colorTextoDisclaimerIa: color-mix(in srgb, var(--colorNegro-escala-2) 40%, transparent);
-  --colorReferenciasIa: var(--colorAzul-oscuro);
+  --colorBackgroundReferenciaIa: var(--colorAzul-oscuro-escala3);
+  --colorReferenciasIa: var(--colorAzul-oscuro-escala3);
 
   /* -> TARJETA IA */
 }

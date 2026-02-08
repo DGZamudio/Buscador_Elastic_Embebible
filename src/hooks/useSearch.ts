@@ -253,7 +253,7 @@ function normalizeDocReferences(text: string) {
             docMap[docId] = counter
             counter++
         }
-        return `[${docMap[docId]}]`
+        return `<button class="doc-reference">${docMap[docId]}</button>`
     })
 
     return { normalizedText, docMap }

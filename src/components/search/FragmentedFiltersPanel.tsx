@@ -3,6 +3,7 @@ import type { FragmentedFiltersProps } from "../../types/search";
 import { ChevronDown, ChevronRight, Funnel } from "lucide-react";
 import { useEffect, useState } from "react";
 import Loader from "../ui/Loader";
+import { toggle } from "../../utils/utils";
 
 export default function FragmentedFilters({
   fragments,
@@ -14,18 +15,6 @@ export default function FragmentedFilters({
   const [openClasificacion, setOpenClasificacion] = useState<Set<string>>(new Set());
   const [openTipos, setOpenTipos] = useState<Set<string>>(new Set());
   const [openEntidades, setOpenEntidades] = useState<Set<string>>(new Set());
-
-  function toggle(setter: typeof setOpenTipos | typeof setOpenEntidades, key: string) {
-    setter((prev: Set<string>) => {
-      const next = new Set(prev);
-      if (next.has(key)) {
-        next.delete(key);
-      } else {
-        next.add(key);
-      }
-      return next;
-    });
-  }
 
   useEffect(() => { //Cierra el panel en pantallas pequeñas
     const mediaQuery = window.matchMedia("(max-width: 768px)");

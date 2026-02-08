@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { AiMessageCardProps } from "../../types/search";
-import { MoveDown } from "lucide-react";
+import { ChevronDown, ChevronUp, MoveDown } from "lucide-react";
+import { toggle } from "../../utils/utils";
 
 export default function AiMessageCard({
     message, 
@@ -8,6 +9,8 @@ export default function AiMessageCard({
     loading
 }:AiMessageCardProps) {
     const [openTarjeta, setOpenTarjeta] = useState<boolean>(false);
+    const [openReferencias, setOpenReferencias] = useState<boolean>(false);
+    const [openContenidoReferencias, setOpenContenidoReferencias] = useState<Set<string>>(new Set())
   return (
     <div className={`contenedor-tarjeta-mensaje-ia`}>
         <h2 className="titulo-tarjeta-mensaje-ia">
@@ -25,19 +28,49 @@ export default function AiMessageCard({
         ) : (
             <>
             {message && (
-                <p className={`mensaje-ia ${!openTarjeta &&"mensaje-ia-cerrado"}`}>
-                    {message}
-                </p>
+                <>
+                    <p 
+                        className={`mensaje-ia ${!openTarjeta &&"mensaje-ia-cerrado"}`} 
+                        dangerouslySetInnerHTML={{__html: message}} 
+                    />
+                    <div className="contenedor-referencias-mensaje-ia">
+                        <button className="boton-desplegar-enlaces-referencias" onClick={() => setOpenReferencias(!openReferencias)}>
+                            <span className="texto-boton-desplegar-enlaces-referencias">
+                                Fuentes consultadas
+                            </span>
+                            {openReferencias ? <ChevronUp /> : <ChevronDown />}
+                        </button>
+
+                        <div className={`contenedor-enlaces-referencias ${!openReferencias && "referencias-cerrado"}`}>
+                            {citations?.map((citacion, index) => (
+                                <div className="contenedor-referencia-ia" key={index}>
+                                    <div className="contenedor-encabezado-referencia-ia">
+                                        <span className="contenedor-numero-referencia-ia">
+                                            {citacion.number}
+                                        </span> 
+                                        <h3 className="titulo-referencias-ia">
+                                            {citacion.title.replace(".htm","")}
+                                        </h3>
+                                        <button className="boton-open-contenido-referencias" onClick={() => toggle(setOpenContenidoReferencias, citacion.title)}>
+                                            {openContenidoReferencias.has(citacion.title) ? <ChevronUp /> : <ChevronDown />}
+                                        </button>
+                                    </div>
+                                    {openContenidoReferencias.has(citacion.title) && (
+                                        <div className="contenedor-contenido-referencia-ia">
+                                            <p className="contenido-referencia-ia">
+                                                {citacion.content}
+                                            </p>
+                                            <a className="link-contenido-referencia-ia" href={`https://gestornormativo.creg.gov.co/gestor/entorno/docs/${citacion.title}`} target="_blank">Ver contenido completo</a>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </>
             )}
             </>
         )}
-        <div className={`contenedor-enlaces-referencias ${!openTarjeta && "referencias-cerrado"}`}>
-            {citations?.map((citacion, index) => (
-                <a className="contenedor-referencia-ia" key={index} href={`https://gestornormativo.creg.gov.co/gestor/entorno/docs/${citacion.title}`} target="_blank">
-                    <span className="contenedor-numero-referencia-ia">{citacion.number}</span> {citacion.title}
-                </a>
-            ))}
-        </div>
         {(!openTarjeta && !loading) && (
             <button className="boton-mostrar-mas-mensaje-ia" onClick={() => setOpenTarjeta(!openTarjeta)}>
                 Mostrar más

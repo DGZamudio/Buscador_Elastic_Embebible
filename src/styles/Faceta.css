@@ -156,6 +156,7 @@
 
 .separador-filtros-facetados {
     padding: 0px 25px;
+    cursor: pointer;
 }
 
 .titulo-separador-filtros-facetados {
