@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { AiMessageCardProps } from "../../types/search";
 import { ChevronDown, ChevronUp, MoveDown } from "lucide-react";
 import { toggle } from "../../utils/utils";
+import { URL_REFERENCIAS } from "../../services/search.service";
 
 export default function AiMessageCard({
     message, 
@@ -60,7 +61,7 @@ export default function AiMessageCard({
                                             <p className="contenido-referencia-ia">
                                                 {citacion.content}
                                             </p>
-                                            <a className="link-contenido-referencia-ia" href={`https://gestornormativo.creg.gov.co/gestor/entorno/docs/${citacion.title}`} target="_blank">Ver contenido completo</a>
+                                            <a className="link-contenido-referencia-ia" href={`${URL_REFERENCIAS}/${citacion.title}`} target="_blank">Ver contenido completo</a>
                                         </div>
                                     )}
                                 </div>

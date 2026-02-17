@@ -1,5 +1,11 @@
 import type { FragmentedFilters, SearchFilters, SearchResultsResponse } from "../types/search";
 
+const API_BASE_URL = "http://localhost:8000"
+const API_MENSAJE_IA = "https://gacetas-constitucion.normograma.com/pgn4/conversation"
+const ENTIDAD = "pgn"
+export const URL_DOCS = "https://normograma.com/documentospdf/pgn/v3_iconos/compilacion/docs"
+export const URL_REFERENCIAS = "https://normograma.com/LinksIA/pgn2"
+
 export async function regularSearch(
   query: string,
   filters: SearchFilters,
@@ -13,7 +19,7 @@ export async function regularSearch(
   params.append("search_query", query);
 
   const response = await fetch(
-    `http://127.0.0.1:8000/api/v1/regular_search?${params.toString()}`,
+    `${API_BASE_URL}/api/v1/${ENTIDAD}/search/regular?${params.toString()}`,
     {
       method: "POST",
       headers: {
@@ -48,7 +54,7 @@ export async function semanticSearch(
   params.append("search_query", query);
 
   const response = await fetch(
-    `http://127.0.0.1:8000/api/v1/semantic_search?${params.toString()}`,
+    `${API_BASE_URL}/api/v1/${ENTIDAD}/search/semantic?${params.toString()}`,
     {
       method: "POST",
       headers: {
@@ -82,7 +88,7 @@ export async function fragmentFilters(
   params.append("search_query", query);
 
   const response = await fetch(
-    `http://127.0.0.1:8000/api/v1/filter_fragments?${params.toString()}`,
+    `${API_BASE_URL}/api/v1/${ENTIDAD}/filter_fragments?${params.toString()}`,
     {
       method: "POST",
       headers: {
@@ -103,6 +109,22 @@ export async function fragmentFilters(
   return data?.filters ?? null;
 }
 
+export async function getSearchFilters(
+
+) {
+    const response = await fetch(
+        `${API_BASE_URL}/api/v1/${ENTIDAD}/search/filters`
+    )
+
+    if (!response.ok) {
+        throw new Error("Error HTTP");
+    }
+
+    const data = await response.json();
+
+    return data?.filters ?? null;
+}
+
 export async function getAiMessage(
     query:string,
     role:string = "user"
@@ -111,7 +133,7 @@ export async function getAiMessage(
     const date = new Date().toISOString()
 
     const response = await fetch(
-        'https://gacetas-constitucion.normograma.com/creg4/conversation',
+        API_MENSAJE_IA,
         {
             method:"POST",
             headers: {
@@ -131,20 +153,4 @@ export async function getAiMessage(
     )
 
     return response
-}
-
-export async function getSearchFilters(
-
-) {
-    const response = await fetch(
-        'http://localhost:8000/api/v1/search/filters'
-    )
-
-    if (!response.ok) {
-        throw new Error("Error HTTP");
-    }
-
-    const data = await response.json();
-
-    return data?.filters ?? null;
 }

@@ -1,3 +1,4 @@
+import { URL_DOCS } from "../../services/search.service";
 import type { SearchResultsProps } from "../../types/search";
 
 export default function SearchResultsPanel({
@@ -16,7 +17,7 @@ export default function SearchResultsPanel({
             <a
                 key={index}
                 className="panel-sugerencias-item"
-                href={`https://gestornormativo.creg.gov.co/gestor/entorno/docs/${hit._source["doc-name"]}`}
+                href={`${URL_DOCS}/${hit._source["doc-name"]}`}
                 target="_blank"
             >
                 <p className="panel-sugerencias-titulo">

@@ -1,6 +1,7 @@
 import { Building, CalendarDays } from "lucide-react";
 import type { SearchResultsProps } from "../../types/search";
 import NoResults from "../ui/NoResults";
+import { URL_DOCS } from "../../services/search.service";
 
 export default function SearchResultsContent({
   results,
@@ -26,7 +27,7 @@ export default function SearchResultsContent({
                         <a
                             key={index}
                             className="panel-resultados-item"
-                            href={`https://gestornormativo.creg.gov.co/gestor/entorno/docs/${hit._source["doc-name"]}`}
+                            href={`${URL_DOCS}/${hit._source["doc-name"]}`}
                             target="_blank"
                         >
                             <span className="contenedor-etiqueta-tipo">

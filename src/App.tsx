@@ -115,7 +115,7 @@ export default function Buscador() {
                         <div className="contenedor-contenido-consejos-busqueda">
                             <div className="titulo-consejos-busqueda">
                                 <div className="titulo-consejos-busqueda-imagen">
-                                    <img src="/lightbulb.svg" alt="" />
+                                    <img src="lightbulb.svg" alt="" />
                                 </div>
                                 <h2>
                                     Consejos de búsqueda
