@@ -1,6 +1,6 @@
 import type { FragmentedFilters, SearchFilters, SearchResultsResponse } from "../types/search";
 
-const API_BASE_URL = "http://localhost:8000"
+const API_BASE_URL = "http://20.94.247.160:8000"
 const API_MENSAJE_IA = "https://gacetas-constitucion.normograma.com/pgn4/conversation"
 const ENTIDAD = "pgn"
 export const URL_DOCS = "https://normograma.com/documentospdf/pgn/v3_iconos/compilacion/docs"
