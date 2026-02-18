@@ -67,7 +67,7 @@ export default function Buscador() {
   }, [resultsOpen, results]);
 
   return (
-    <div className="contenedor-body">
+    <div className="contenedor-body-buscador">
         <main className="contenedor-main">
             <div className="contenedor-texto-buscador">
                 <h1 className="titulo-buscador">
@@ -115,7 +115,7 @@ export default function Buscador() {
                         <div className="contenedor-contenido-consejos-busqueda">
                             <div className="titulo-consejos-busqueda">
                                 <div className="titulo-consejos-busqueda-imagen">
-                                    <img src="lightbulb.svg" alt="" />
+                                    <img src="images/lightbulb.svg" alt="" />
                                 </div>
                                 <h2>
                                     Consejos de búsqueda
